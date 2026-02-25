@@ -1,0 +1,67 @@
+---
+title: "Semgrep Assistant metrics and methodology"
+---
+
+* [Deployment](/docs/tags/deployment)
+* [Semgrep Assistant](/docs/tags/semgrep-assistant)
+
+Copy as md
+
+Metrics for evaluating Semgrep Assistant's performance are derived from two sources:
+
+* **User feedback** on Assistant recommendations within the product
+* **Internal triage and benchmarking** conducted by Semgrep's security research team
+
+This methodology ensures that Assistant is evaluated from both user and expert perspectives. This gives Semgrep's product and engineering teams a holistic view into Assistant's real-world performance.[1](#user-content-fn-1)
+
+## User feedback[​](#user-feedback "Direct link to User feedback")
+
+User feedback shows the aggregated and anonymized performance of Assistant across **more than 1000 customers**, providing a comprehensive **real-world dataset**.
+
+Users are prompted in-line to "thumbs up" or "thumbs down" Assistant suggestions as they receive Assistant suggestions in their PR or MR. This ensures that sampling bias is reduced, as both developers and AppSec engineers can provide feedback.
+
+**Results as of Aug 21, 2025:**
+
+|                                                      |                              |
+| ---------------------------------------------------- | ---------------------------- |
+| Customers in dataset                                 | **3500+**                    |
+| Findings analyzed                                    | **6,500,000+**               |
+| Average reduction in findings[2](#user-content-fn-2) | **60%**                      |
+| Human-agree rate                                     | **96%**                      |
+| Median time to resolution                            | **22% faster than baseline** |
+| Average time saved per finding                       | **30 minutes**               |
+
+## Internal benchmarks[​](#internal-benchmarks "Direct link to Internal benchmarks")
+
+Internal benchmarks for Assistant use a process in which a rotating team of security engineers conduct periodic reviews of findings and their Assistant generated triage recommendations or remediation guidance. This is the same process used to evaluate Semgrep's SAST engine and rule performance.
+
+Internal benchmarks for Assistant run on the same dataset used by Semgrep's security research team to analyze Semgrep rule performance. This means the dataset is not prone to cherry-picked findings that are easier for AI to analyze, and accurately represents real-world performance across a variety of contexts.
+
+|                                                             |           |
+| ----------------------------------------------------------- | --------- |
+| Findings analyzed                                           | **2000+** |
+| False positive confidence rate[3](#user-content-fn-3)       | **96%**   |
+| Remediation guidance confidence rate[4](#user-content-fn-4) | **80%**   |
+
+## Footnotes[​](#footnote-label "Direct link to Footnotes")
+
+1. Learn more about how Semgrep achieved these numbers in [How we built an AppSec AI that security researchers agree with 96% of the time](https://semgrep.dev/blog/2025/building-an-appsec-ai-that-security-researchers-agree-with-96-of-the-time/). [↩](#user-content-fnref-1)
+
+2. The average % of SAST findings that Assistant filters out as noise. [↩](#user-content-fnref-2)
+
+3. False positive confidence rate measures how often Assistant is correct when it identifies a false positive. **A high confidence rate means users can trust when Assistant identifies a false positive - it does not mean that Assistant catches all false positives.** [↩](#user-content-fnref-3)
+
+4. Remediation guidance is rated on a binary scale of "helpful" / "not helpful". [↩](#user-content-fnref-4)
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Deployment](/docs/tags/deployment)
+* [Semgrep Assistant](/docs/tags/semgrep-assistant)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/semgrep-assistant/metrics.md)
+
+Last updated on **Aug 21, 2025**

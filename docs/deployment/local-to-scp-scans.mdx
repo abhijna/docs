@@ -1,0 +1,104 @@
+---
+title: "Scan local repositories and upload findings"
+---
+
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+Copy as md
+
+You can send findings (scan results) from a local repository to Semgrep AppSec Platform. The local repository is a separate **project** from its remote counterpart. This is useful for testing rules and policies, or simply scanning your own work before it is merged to your organization's trunk branch.
+
+## Prerequisites[​](#prerequisites "Direct link to Prerequisites")
+
+* Locally installed `semgrep`.
+
+## Best practices[​](#best-practices "Direct link to Best practices")
+
+You can keep your local scans private and separate from your team by creating a Semgrep organization with only a single user. This is a **personal** org, similar to a personal account in your source code manager (SCM). This separation ensures that your findings data does not affect organizational records and trends.
+
+To create an org, perform the steps in [Create additional orgs](/docs/deployment/create-account-and-orgs#create-additional-orgs). You don't need to perform any other steps.
+
+## Send findings from local repository scan to Semgrep AppSec Platform[​](#send-findings-from-local-repository-scan-to-semgrep-appsec-platform "Direct link to Send findings from local repository scan to Semgrep AppSec Platform")
+
+1. Ensure that you are signed into Semgrep AppSec Platform and you've switched to the org you want to send findings to. It is recommended to send local repository findings to your **personal** org.
+2. In your CLI, log in to Semgrep:
+   ```
+   semgrep login
+   ```
+3. Click the login URL provided, or copy and paste it into your browser's address bar. Your are taken to your web browser to complete the login process.
+4. Follow any additional steps.
+5. After logging in, start a scan in your CLI:
+   ```
+   semgrep ci
+   ```
+
+## Project separation between local and remote repositories[​](#project-separation-between-local-and-remote-repositories "Direct link to Project separation between local and remote repositories")
+
+The project slug for a **remote repository** takes the form `ACCOUNT-NAME/REPOSITORY_NAME.`
+
+The project slug for a **local repository** takes the form `local_scan/REPOSITORY-NAME`.
+
+* **For personal orgs:** A local repository scan does **not** overwrite the findings records of its remote counterpart. They are two separate projects. Personal accounts only have one team member or user: you.
+* **For organization orgs**: A local repository scan does **not** overwrite findings records of its remote counterpart. However, if two members have both cloned the same local repository, such as `RepoA`, and both send local `RepoA` findings, one set of findings may overwrite other unintentionally. This is because orgs can have more than one team member, but all local scans are sent to the same project slug.
+
+## Link local scans to their remote repositories[​](#link-local-scans-to-their-remote-repositories "Direct link to Link local scans to their remote repositories")
+
+When sending findings from local repositories to Semgrep AppSec Platform, the links shown on the **Findings** page are not generated. They may be missing, or they may not link to the correct file. This is because the scan was performed on your local repository, not remote.
+
+You can optionally set up cross-linking between local and remote repositories to create the correct hyperlinks. To do so, set up environment variables through the CLI:
+
+1. Navigate to the root of your repository.
+
+2. Create the `SEMGREP_REPO_URL` variable, setting it to the URL you'd use to access your online repository:
+   ```
+   export SEMGREP_REPO_URL=URL_ADDRESS
+   ```
+
+3. Create the `SEMGREP_BRANCH` variable:
+
+   1. Retrieve the branch name:
+      ```
+      git rev-parse --abbrev-ref HEAD
+      ```
+   2. Set the variable as shown, making sure that you replace the `BRANCH_NAME` placeholder:
+      ```
+      export SEMGREP_BRANCH=BRANCH_NAME
+      ```
+
+4. Create the `SEMGREP_REPO_NAME` variable, setting it to the name of your repository:
+   ```
+   export SEMGREP_REPO_NAME=REPO_NAME
+   ```
+
+5. Create the `SEMGREP_COMMIT` variable:
+
+   1. Retrieve the commit hash:
+      ```
+      git log -n 1
+      ```
+   2. Set the variable by entering the text below, substituting `COMMIT_HASH` with the value from the previous step.
+      ```
+      export SEMGREP_COMMIT=COMMIT_HASH
+      ```
+
+After performing these steps, rescan your repository to correctly generate links in Semgrep AppSec Platform.
+
+### Sample values[​](#sample-values "Direct link to Sample values")
+
+The following is an example of the variables you'd need to create to generate links in Semgrep AppSec Platform, along with sample values:
+
+```
+# Set the repository URLexport SEMGREP_REPO_URL=https://github.com/corporation/s_juiceshop# Set the repository nameexport SEMGREP_REPO_NAME=corporation/s_juiceshop# Retrieve the branchgit rev-parse --abbrev-ref HEADs_update# Set the branchexport SEMGREP_BRANCH=s_update# Retrieve the commit hashgit log -n 1commit fa4e36b9369e5b039bh2220b5h9R61a38b077f29 (HEAD -> s_juiceshop, origin/main, origin/HEAD, master)# Set the commit hashexport SEMGREP_COMMIT=fa4e36b9369e5b039bh2220b5h9R61a38b077f29
+```
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/deployment/local-to-scp-scans.md)
+
+Last updated on **Jan 30, 2026**

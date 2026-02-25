@@ -1,0 +1,196 @@
+---
+title: "Perform cross-file analysis"
+---
+
+* [Semgrep Code](/docs/tags/semgrep-code)
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+Copy as md
+
+Use Semgrep Code's **cross-file (interfile) analysis** to detect vulnerabilities across files and folders within a project.
+
+By design, Semgrep open source software, Semgrep Community Edition (CE) can only analyze interactions within a single function, also known as **intraprocedural analysis**. This limited scope makes Semgrep CE fast and easy to integrate into developer workflows.
+
+Semgrep Code runs **cross-function (interprocedural)** analysis by default, and gives security teams the option to trade off speed for better results and deeper analysis with **cross-file analysis**. By analyzing interactions across files and functions, Semgrep Code can reduce noise, uncover new vulnerabilities, and make results easier to understand.
+
+<Note>
+  Refer to [Supported languages](/docs/supported-languages#language-maturity-summary) to see languages supported by Semgrep Code.
+</Note>
+
+## Run cross-file analysis[​](#run-cross-file-analysis "Direct link to Run cross-file analysis")
+
+This section guides you through installing the proprietary cross-file (interfile) analysis binary and helps you to scan your projects both in CLI and with Semgrep AppSec Platform.
+
+### Run cross-file analysis with Semgrep AppSec Platform[​](#run-cross-file-analysis-with-semgrep-appsec-platform "Direct link to Run cross-file analysis with Semgrep AppSec Platform")
+
+<Info>
+  You have completed a [Semgrep core deployment](/docs/deployment/core-deployment).
+</Info>
+
+This is the preferred method to run cross-file analysis. It enables you to view and triage your findings from a centralized location. Your source code is not uploaded.
+
+1. Sign in to [Semgrep AppSec Platform](https://semgrep.dev/login).
+2. Go to **[Settings > General > Code](https://semgrep.dev/orgs/-/settings/general/code)**.
+3. Click the **Cross-file analysis** toggle to turn on this feature.
+4. Ensure that you have the **default ruleset** added in your **[Policies page](https://semgrep.dev/orgs/-/policies)**. If this ruleset is **not** added, go to [Semgrep Registry - Default ruleset page](https://semgrep.dev/p/default), then click **Add to Policy**. For best results, set this ruleset to the **Monitor** rule mode.
+
+**Full scans** now include cross-file analysis. You can trigger a full scan through your CI provider. Note that cross-file analysis does **not** currently run on diff-aware (pull request or merge request) scans.
+
+### Run cross-file analysis in the CLI[​](#run-cross-file-analysis-in-the-cli "Direct link to Run cross-file analysis in the CLI")
+
+<Info>
+  * Local installation of Semgrep CLI. See [Getting started with Semgrep](/docs/getting-started/quickstart) to install Semgrep CLI.
+</Info>
+
+1. Sign up or sign in to [Semgrep AppSec Platform](https://semgrep.dev/login).
+2. For first-time users, click **Create an organization**. Note that you can further integrate organizations (orgs) with GitLab accounts and GitHub accounts, including personal and org accounts, after you complete this procedure.
+3. Go to **[Settings > General > Code](https://semgrep.dev/orgs/-/settings/general/code)**.
+4. Click the **Cross-file analysis** toggle to turn on this feature.
+5. Ensure that you are in the **root directory** of the repository you want to scan.
+6. In your CLI, log in to your Semgrep AppSec Platform account and run a scan:
+
+```
+semgrep login && semgrep ci
+```
+
+#### Update cross-file analysis in the CLI[​](#update-cross-file-analysis-in-the-cli "Direct link to Update cross-file analysis in the CLI")
+
+Cross-file analysis uses a separate `semgrep` binary. To update to the latest version, follow these steps:
+
+1. Update your Semgrep CLI tool with the following command:
+
+   <Tabs>
+     <Tab title="macOS">
+       ```
+       brew upgrade semgrep
+       ```
+     </Tab>
+
+     <Tab title="Linux">
+       Alternatively:
+     </Tab>
+
+     <Tab title="Windows">
+       ```
+       python3 -m pip install --upgrade semgrep
+       ```
+     </Tab>
+
+     <Tab title="Docker">
+       ```
+       python3 -m pip install --upgrade semgrep# if you get the following error "error: externally-managed-environment",# see semgrep.dev/docs/kb/semgrep-appsec-platform/error-externally-managed-environment 
+       ```
+     </Tab>
+
+     <Tab title>
+       ```
+       # ensure that you have Python 3.9 or later installed# before proceedingpython3 -m pip install --upgrade semgrep
+       ```
+     </Tab>
+
+     <Tab title>
+       ```
+       docker pull semgrep/semgrep:latest
+       ```
+     </Tab>
+   </Tabs>
+
+2. Log in to Semgrep AppSec Platform:
+
+   ```
+   semgrep login
+   ```
+
+3. Update the Semgrep cross-file binary:
+
+   ```
+   semgrep install-semgrep-pro
+   ```
+
+### Write rules that analyze across files and functions[​](#write-rules-that-analyze-across-files-and-functions "Direct link to Write rules that analyze across files and functions")
+
+To create rules that analyze across files and functions, add `interfile: true` under the `options` key when defining a rule. This key tells Semgrep to use the rule for both cross-function and cross-file analysis.
+
+#### Cross-function example[​](#cross-function-example "Direct link to Cross-function example")
+
+The following example shows how to define the `interfile` key (see the **Rule** pane) and the resulting cross-function analysis in the **Test code** pane.
+
+[Interfile key example](https://semgrep.dev/embed/editor?snippet=lRZ5)
+
+Click **Run** to see the true positive in lines 27-30.
+
+Semgrep Code performed cross-function analysis as the `userInput()` source was called in `main()` while the `exec()` sink was called in the `DockerCompose` class.
+
+Interact with the rule widget to compare Semgrep Community Edition (CE) and Semgrep Code. In the **Rule** pane, you can remove the lines:
+
+```
+options:  interfile: true
+```
+
+This results in a failure to detect the true positive, because Semgrep did not perform cross-function analysis.
+
+## Known limitations of cross-file analysis[​](#known-limitations-of-cross-file-analysis "Direct link to Known limitations of cross-file analysis")
+
+### CommonJS[​](#commonjs "Direct link to CommonJS")
+
+Currently Semgrep's cross-file analysis does not handle specific cases of CommmonJS where you define a function and assign it to an export later. Cross-file analysis does not track the code below:
+
+```
+function get_user() {    return get_user_input("example")  }module.exports = get_user
+```
+
+### Regressions in cross-file analysis[​](#regressions-in-cross-file-analysis "Direct link to Regressions in cross-file analysis")
+
+Cross-file analysis resolves names differently than Semgrep CE's analysis. Consequently, rules with `interfile: true` may produce different results than Semgrep CE. Some instances could be regarded as regressions; if you encounter them, please file a bug report. When you need to report a bug in Semgrep's cross-file analysis, go through [Semgrep Support](/docs/support). You can also contact us through [Semgrep Community Slack group](https://go.semgrep.dev/slack).
+
+## Appendix[​](#appendix "Direct link to Appendix")
+
+### Types of Semgrep Code analysis[​](#types-of-semgrep-code-analysis "Direct link to Types of Semgrep Code analysis")
+
+* Cross-file (interfile) analysis
+
+  * Cross-file analysis finds patterns spanning multiple files within a project to help security engineers deeply understand their organization's security issues. This analysis reduces noise and detects issues that Semgrep CE can't find.
+  * Cross-file analysis runs on full scans. These scans may take longer to complete and can use more memory than Semgrep CE scans. See the available languages for cross-file analysis in [Supported languages](/docs/supported-languages/#semgrep-pro-engine).
+  * In Semgrep Code, cross-file analysis includes cross-function analysis as well.
+
+* Cross-function (interprocedural) analysis
+
+  * Cross-function analysis finds patterns within a single file spanning code blocks and functions.
+  * Semgrep Code scans run cross-function analysis by default.
+  * See an example of cross-function analysis in [Semgrep Code cross-function example](#pro-engine-cross-function-example).
+  * See the available languages for cross-function analysis in [Supported languages](/docs/supported-languages/#semgrep-pro-engine).
+
+#### Semgrep Code cross-file CI scan issues[​](#semgrep-code-cross-file-ci-scan-issues "Direct link to Semgrep Code cross-file CI scan issues")
+
+To provide reliably completed scans, Semgrep Code can **fall back** from cross-file analysis to single-file analysis. This ensures that in the vast majority of cases, scans run successfully.
+
+By default, if a scan uses more than **5 GB** of memory during cross-file pre-processing, the scan uses single-file analysis to ensure lower memory consumption. Similarly, if a cross-file scan doesn't complete after 3 hours, the analysis times out and Semgrep re-scans the repository using single-file analysis. Typically, this happens because the repository is very large.
+
+If 1-2 repositories cause CI scan issues and scanning these repositories with interfile analysis is not critical, modify your configuration file to use `semgrep ci --pro-intrafile`. This overrides the Semgrep AppSec Platform setting for these repositories, and always runs these scans with single-file, cross-function analysis.
+
+If many repositories cause scan issues, or you have critical repositories you are unable to scan with Semgrep's interfile analysis:
+
+1. Disable the **Cross-file analysis** toggle in the **[Settings > General > Code](https://semgrep.dev/orgs/-/settings/general/code)** page of your organization.
+2. Review scan troubleshooting guides such as [A Semgrep scan is having a problem - what next?](/docs/kb/semgrep-code/semgrep-scan-troubleshooting) or [Troubleshooting "You are seeing this because the engine was killed."](/docs/kb/semgrep-code/scan-engine-kill)
+3. If you need additional guidance, [contact Semgrep Support](/docs/support), or reach out to the Semgrep team in the [Semgrep Community Slack](https://go.semgrep.dev/slack) so we can help you resolve the issue and create a plan for your organization.
+
+### Difference between cross-file analysis and join mode[​](#difference-between-cross-file-analysis-and-join-mode "Direct link to Difference between cross-file analysis and join mode")
+
+Cross-file analysis is different from [join mode](/docs/writing-rules/experiments/join-mode/overview), which also allows you to perform cross-file analyses by letting you join on the metavariable matches in separate rules. Join mode is an experimental feature which is not actively developed or maintained. You may encounter many issues while using join mode.
+
+### Feedback for Semgrep Code's advanced analyses[​](#feedback-for-semgrep-codes-advanced-analyses "Direct link to Feedback for Semgrep Code's advanced analyses")
+
+The team at Semgrep is excited to hear what's on your mind. As you explore these features, we want to know what you'd like to be able to capture with it. We believe that this deeper analysis helps users find more vulnerabilities, build trust with developers, and enforce code standards quickly. Let us know what you think about the results in the [Semgrep Community Slack](https://go.semgrep.dev/slack).
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Semgrep Code](/docs/tags/semgrep-code)
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/semgrep-code/semgrep-pro-engine-intro.md)
+
+Last updated on **Nov 17, 2025**

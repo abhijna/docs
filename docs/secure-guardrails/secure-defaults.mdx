@@ -1,0 +1,48 @@
+---
+title: "Secure defaults"
+---
+
+* [Secure guardrails](/docs/tags/secure-guardrails)
+
+Copy as md
+
+**Secure defaults** are inherently secure libraries, frameworks, configurations, or settings. They mitigate common security concerns, such as preventing cross-site request forgery (CSRF) by properly verifying inbound requests in Django or Flask applications. By adopting secure defaults, teams minimize the need for developers to manually implement security measures.
+
+Secure default rules are Semgrep Code (SAST) rules that codify a secure default. The Semgrep team recommends deploying these rules as guardrails because the early adoption of secure defaults helps prevent additional vulnerabilities.
+
+Some secure default rules codify universally secure practices and work out of the box, while others are organization-specific and require customization.
+
+In the following example, the rule detects if a Flask [WTForm](https://flask-wtf.readthedocs.io/en/0.15.x/config/) view is protected from CSRF by default by checking the configuration variable `WTF_CSRF_CHECK_DEFAULT`. If it is set to `False` then the developer must call `csrf.protect()` whenever they handle a request—a manual process they must remember every time. Thus, `WTF_CSRF_CHECK_DEFAULT=True` is a secure default, which this Semgrep rule enforces.
+
+[tk](https://semgrep.dev/embed/editor?snippet=ReRkO)
+
+***Figure**. A rule that helps secure a Flask app from CSRF by default*
+
+## Semgrep Code supported languages[​](#semgrep-code-supported-languages "Direct link to Semgrep Code supported languages")
+
+Semgrep Code provides secure default rules for the following languages:
+
+* C#
+* Python (Flask, FastAPI, and Django frameworks)
+
+Custom rules to deploy secure default rules can be written in any of [Semgrep Code’s supported languages](/docs/supported-languages#language-maturity-summary).
+
+## View Semgrep secure default rules[​](#view-semgrep-secure-default-rules "Direct link to View Semgrep secure default rules")
+
+View all proprietary Semgrep secure default rules through the ruleset [p/secure-defaults](https://semgrep.dev/p/secure-defaults).
+
+## Next steps[​](#next-steps "Direct link to Next steps")
+
+* [Create your own secure default rules](/docs/secure-guardrails/custom-guardrails-rules#general-steps)
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Secure guardrails](/docs/tags/secure-guardrails)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/secure-guardrails/secure-defaults.md)
+
+Last updated on **Sep 5, 2025**

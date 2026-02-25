@@ -1,0 +1,73 @@
+---
+title: "Semgrep Code product terms"
+---
+
+* [Semgrep Code](/docs/tags/semgrep-code)
+
+Copy as md
+
+The terms and definitions provided here are specific to Semgrep Code.
+
+For rule-writing and SAST (static application security testing) terms, see the [Rule-writing glossary](/docs/writing-rules/glossary).
+
+## Default branch[​](#default-branch "Direct link to Default branch")
+
+Also known as a **mainline**, **primary**, or **trunk** branch. In many cases, Semgrep automatically detects these branches as primary branches when it first scans your project. If you have projects (repositories) with unique primary branch names, you can set them through the Semgrep web app.
+
+## Diff-aware scan[​](#diff-aware-scan "Direct link to Diff-aware scan")
+
+A diff-aware scan is a type of scan that shows only the findings that have been caused by changes in files starting from a specific Git baseline. It is typically performed on feature branches when a pull request or merge request is opened. Unlike full scans, diff-aware scans only consider changes within modified files. At this time, cross-file analysis is not supported for diff-aware scans.
+
+## Full scan[​](#full-scan "Direct link to Full scan")
+
+A full scan scans the entire codebase or Git repository in its current state. It is typically performed on trunk or mainline branches, such as `main`. Semgrep, Inc. recommends performing full scans on a recurring basis, such as daily or weekly.
+
+## Policy[​](#policy "Direct link to Policy")
+
+A policy defines the set of rules that Semgrep runs and the workflow actions it undertakes when a rule from the policy generates a finding. The workflow action performed by Semgrep when it detects a finding can include notifying Slack channels or posting a comment in the pull request or merge request that generated the finding.
+
+Not to be confused with **policy-as-code**.
+
+## Registry (Semgrep Registry)[​](#registry-semgrep-registry "Direct link to Registry (Semgrep Registry)")
+
+A [collection of publicly available SAST rules](https://semgrep.dev/r) that you can download. Rules can be filtered by language, OWASP bug class, severity, and so on. [Contributions are welcome](/docs/contributing/contributing-to-semgrep-rules-repository).
+
+Rules are frequently organized by [rulesets](#ruleset), enabling you to find related rules by framework and language.
+
+### Sources of rules[​](#sources-of-rules "Direct link to Sources of rules")
+
+The Registry contains rules imported from various repositories. These include rules authored by other individuals or groups, such as Trail of Bits and GitLab.
+
+You can view a rule's `license` key to ensure the license meets your needs.
+
+## Ruleset[​](#ruleset "Direct link to Ruleset")
+
+Rulesets are rules related through a programming language, OWASP category, or framework. Rulesets are curated by the team at Semgrep and updated as new rules are added to the Semgrep Registry.
+
+## Scan target[​](#scan-target "Direct link to Scan target")
+
+A scan target is any file, or collection of files and directories that Semgrep can scan. While Semgrep can scan **any** text file through `generic` mode, Semgrep primarily scans the following:
+
+### Codebase[​](#codebase "Direct link to Codebase")
+
+Any code files within a specified directory and its subdirectories.
+
+### Project[​](#project "Direct link to Project")
+
+A repository or codebase that you have added to Semgrep Cloud Platform for scanning along with finding metadata and other Semgrep data and resources.
+
+### Repository[​](#repository "Direct link to Repository")
+
+A location, typically remote, for source code, including metadata relating to the source code. Semgrep supports Git repositories.
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Semgrep Code](/docs/tags/semgrep-code)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/semgrep-code/glossary.md)
+
+Last updated on **Sep 17, 2025**

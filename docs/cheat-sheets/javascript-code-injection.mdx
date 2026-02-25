@@ -1,0 +1,94 @@
+---
+title: "Prevent Code Injection in JavaScript"
+---
+
+* [javascript](/docs/tags/javascript)
+* [code-injection](/docs/tags/code-injection)
+
+Copy as md
+
+This is a code injection prevention cheat sheet by Semgrep, Inc. It contains code patterns of potential ways to run arbitrary code in an application. Instead of scrutinizing code for exploitable vulnerabilities, the recommendations in this cheat sheet pave a safe road for developers that mitigate the possibility of code injection in your code. By following these recommendations, you can be reasonably sure your code is free of code injection.
+
+Learn more about [Code Injection](/docs/learn/vulnerabilities/code-injection) vulnerability concepts.
+
+### Check your project using Semgrep[​](#check-your-project-using-semgrep "Direct link to Check your project using Semgrep")
+
+The following command runs an optimized set of rules for your project:
+
+```
+semgrep --config p/default
+```
+
+***
+
+## 1. Executing or evaluating code[​](#1-executing-or-evaluating-code "Direct link to 1. Executing or evaluating code")
+
+### 1.A. running code with VM module[​](#1a-running-code-with-vm-module "Direct link to 1.A. running code with VM module")
+
+The `vm` module enables compiling and running code within V8 Virtual Machine contexts. The `vm` module is not secure. Do not use it to run untrusted code. If user input is used as a part of the code passed to `vm` functions, it can result in code injection. See [VM (executing JavaScript)](https://nodejs.org/dist/latest-v18.x/docs/api/vm.html#vm-executing-javascript) documentation.
+
+The following list documents all potentially vulnerable functions that compile and execute code from the `vm` module:
+
+* `vm.runInContext`
+* `vm.runInNewContext`
+* `vm.runInThisContext`
+* `vm.compileFunction`
+* `new vm.Script`
+* `new vm.SourceTextModule`
+
+Example:
+
+```
+const vm = require('vm');const contextObject = { globalVar: 1 };// safevm.runInContext('globalVar *= 2;', contextObject);// vulnerablelet userInput = 'this.constructor.constructor("return process.env")()'; // Value supplied by user inputvm.runInContext(`globalVar = ${userInput};`, contextObject);// safeconst code = `return 'hello ' + name`vm.compileFunction(code, [], { parsingContext: vm.createContext({ name: 'name' }) })// vulnerablelet userInput = '1; while (true)
+```
+
+#### References[​](#references "Direct link to References")
+
+* [VM module documentation](https://nodejs.org/dist/latest-v14.x/docs/api/vm.html)
+
+#### Mitigation[​](#mitigation "Direct link to Mitigation")
+
+* Don't use the `vm` module for running untrusted code.
+* If you need to use functions of the `vm` module with non-literal values, ensure that the executed content cannot be controlled by external sources.
+* If it's not possible, strip everything except alphanumeric characters from the input.
+
+#### Semgrep rule[​](#semgrep-rule "Direct link to Semgrep rule")
+
+[javascript.lang.security.audit.vm-injection.vm-runincontext-context-injection](https://semgrep.dev/r?q=javascript.lang.security.audit.vm-injection.vm-runincontext-context-injection)
+
+### 1.B. eval or new Function[​](#1b-eval-or-new-function "Direct link to 1.B. eval or new Function")
+
+The `eval()` or `new Function()` function evaluates JavaScript code represented as a string. Executing JavaScript from a string is an enormous security risk. It is far too easy for a bad actor to run arbitrary code when you use `eval()` or `new Function()`.
+
+Example:
+
+```
+const userInput = "1;require('child_process').exec('cat /etc/passwd')"eval(`var x = ${userInput}`)const userInput = "require('child_process').exec('cat /etc/passwd') && console.log"var x = new Function(`return ${userInput}(a,b)`)
+```
+
+#### References[​](#references-1 "Direct link to References")
+
+* [Never use eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval#never_use_eval!) in MDN Web Docs documentation.
+
+#### Mitigation[​](#mitigation-1 "Direct link to Mitigation")
+
+* Don't use `eval()` or `new Function()` if possible.
+* If you need to use `eval()` or `new Function()` with non-literal values, ensure that the executed content cannot be controlled by external sources.
+* If it's not possible, strip everything except alphanumeric characters from the input.
+
+#### Semgrep rule[​](#semgrep-rule-1 "Direct link to Semgrep rule")
+
+[javascript.lang.security.detect-eval-with-expression.detect-eval-with-expression](https://semgrep.dev/r?q=javascript.lang.security.detect-eval-with-expression.detect-eval-with-expression)
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [javascript](/docs/tags/javascript)
+* [code-injection](/docs/tags/code-injection)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/cheat-sheets/javascript-code-injection.mdx)
+
+Last updated on **Sep 30, 2025**

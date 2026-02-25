@@ -1,0 +1,53 @@
+---
+title: "Receive email notifications"
+---
+
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+Copy as md
+
+You can receive emails from Semgrep regarding **new findings** and **failed scans**.
+
+Perform these steps in Semgrep AppSec Platform to create an email integration and receive notifications:
+
+1. Create an email integration:
+
+   1. On the navigation menu, click **Settings > Integrations > Add**.
+   2. Click on **Email**.
+   3. Enter a **Name** for the integration.
+   4. Enter the **Email** address to receive Semgrep findings.
+   5. Click **Subscribe**.
+
+2. Turn notifications on:
+
+   1. Click **Rules > Policies > Rule Modes**.
+   2. Click the **Edit** button of the Rule Mode for which you want to receive email notifications. For example, if you want to be notified of all blocking findings through email, click the **Edit** button of the **Block** mode.
+   3. Repeat the previous step for all Rule Modes that you want to receive notifications for.
+
+## Notification and alert de-duplication[​](#notification-and-alert-de-duplication "Direct link to Notification and alert de-duplication")
+
+Notifications are sent only the first time a given finding is detected.
+
+When running a diff-aware scan, Semgrep doesn't notify you when a pull request has a finding that existed on the base branch already, even if that line is moved or re-indented.
+
+Semgrep also tracks notifications that have already been sent, so subsequent scans of the same changes in a pull request won't result in duplicate notifications.
+
+<Note>
+  See [Findings in CI](/docs/semgrep-ci/findings-ci) for more information about how Semgrep tracks a finding through its lifetime.
+</Note>
+
+### Number of emails[​](#number-of-emails "Direct link to Number of emails")
+
+Emails about new findings are triggered only once. These emails also include a **summary** of current open findings.
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/semgrep-appsec-platform/email.md)
+
+Last updated on **Jan 30, 2026**

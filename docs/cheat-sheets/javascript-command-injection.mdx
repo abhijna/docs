@@ -1,0 +1,100 @@
+---
+title: "Prevent Command Injection for JavaScript"
+---
+
+* [javascript](/docs/tags/javascript)
+* [command-injection](/docs/tags/command-injection)
+
+Copy as md
+
+This is a command injection prevention cheat sheet by Semgrep, Inc. It contains code patterns of potential ways to run an OS command in an application. Instead of scrutinizing code for exploitable vulnerabilities, the recommendations in this cheat sheet pave a safe road for developers that mitigate the possibility of command injection in your code. By following these recommendations, you can be reasonably sure your code is free of command injection.
+
+Learn more about [Command Injection](/docs/learn/vulnerabilities/command-injection) vulnerability concepts.
+
+### Check your project using Semgrep[​](#check-your-project-using-semgrep "Direct link to Check your project using Semgrep")
+
+The following command runs an optimized set of rules for your project:
+
+```
+semgrep --config p/default
+```
+
+## 1. Running an OS command[​](#1-running-an-os-command "Direct link to 1. Running an OS command")
+
+### 1.A. Spawning a shell with exec function[​](#1a-spawning-a-shell-with-exec-function "Direct link to 1.A. Spawning a shell with exec function")
+
+The `exec()` function executes shell commands. It spawns a shell and then executes the command within the spawned shell, buffering any generated output. Never pass unsanitized user input to this function. Any input containing shell metacharacters can be used to trigger the execution of arbitrary commands.
+
+Example:
+
+```
+const {exec} = require('child_process')const userInput = "$(dangerous command)" // Value supplied by user input// Vulnerableexec(`cat *.js ${userInput}`, (error, stdout, stderr) => {  console.log(stdout)})
+```
+
+#### References[​](#references "Direct link to References")
+
+* [`child_process` module documentation](https://nodejs.org/dist/latest-v14.x/docs/api/child_process.html)
+
+#### Mitigation[​](#mitigation "Direct link to Mitigation")
+
+* Always try to use internal JavaScript APIs (if they exist) instead of running an OS command. In other words, use internal language features instead of invoking commands that can be manipulated by a malicious actor.
+* Don’t pass user-controlled input or use an allowlist for inputs.
+* If it is not possible, use an array with a sequence of program arguments instead of a single string.
+* Avoid non-literal values for the command string. Strip everything except alphanumeric characters from an input provided for the command string and arguments.
+
+#### Semgrep rule[​](#semgrep-rule "Direct link to Semgrep rule")
+
+[javascript.lang.security.detect-child-process.detect-child-process](https://semgrep.dev/r?q=javascript.lang.security.detect-child-process.detect-child-process)
+
+### 1.B. Spawning a process with spawn function[​](#1b-spawning-a-process-with-spawn-function "Direct link to 1.B. Spawning a process with spawn function")
+
+The `spawn()` and `spawnSync()` functions spawn a new process using the command with a list of arguments. This allows spawning any programs or running shell processes with arbitrary arguments, which can result in a command injection vulnerability.
+
+Example:
+
+```
+const {spawn} = require('child_process')// Not vulnerableconst userInput = '' // value supplied by user inputspawn('cat', ['*.js', userInput])// Vulnerableconst userInput = 'pwn-command' // value supplied by user inputspawn(userInput, ['-a', '-b'])// Vulnerableconst userInput = 'echo 1 | cat /etc/passwd' // value supplied by user inputspawn("sh", ["-c", userInput])
+```
+
+#### References[​](#references-1 "Direct link to References")
+
+[`child_process` module documentation](https://docs.oracle.com/javase/7/docs/api/java/lang/ProcessBuilder.html)
+
+#### Mitigation[​](#mitigation-1 "Direct link to Mitigation")
+
+* Always try to use internal JavaScript APIs (if they exist) instead of running an OS command. In other words, use internal language features instead of invoking commands that can be manipulated by a malicious actor.
+
+* Don’t pass user-controlled input or use an allowlist for inputs.
+
+* Do not include command arguments in a command string, use parameterization instead. For example: Use:
+
+  ```
+  spawn("/path/to/myCommand", ["myArg1", inputValue])
+  ```
+
+  Instead of:
+
+  ```
+  spawn("bash", ["-c", "myCommand myArg1 " + inputValue])
+  ```
+
+* Define a list of allowed arguments.
+
+* Avoid non-literal values for the command string. Strip everything except alphanumeric characters from an input provided for the command string and arguments.
+
+#### Semgrep rule[​](#semgrep-rule-1 "Direct link to Semgrep rule")
+
+[javascript.lang.security.detect-child-process.detect-child-process](https://semgrep.dev/r?q=javascript.lang.security.detect-child-process.detect-child-process)
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [javascript](/docs/tags/javascript)
+* [command-injection](/docs/tags/command-injection)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/cheat-sheets/javascript-command-injection.mdx)
+
+Last updated on **Sep 30, 2025**

@@ -1,0 +1,48 @@
+---
+title: "Customize a core deployment"
+---
+
+* [Deployment](/docs/tags/deployment)
+
+Copy as md
+
+Now that you've finished your Semgrep core deployment, you can either customize Semgrep's scan behavior or continue to enable additional deployment features. The following sections list common tasks after you've finished your core deployment.
+
+## Customize Semgrep scans or triage workflow[​](#customize-semgrep-scans-or-triage-workflow "Direct link to Customize Semgrep scans or triage workflow")
+
+| Concern                                                                                     | Guide                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Semgrep scans irrelevant files.                                                             | [Ignore files, folders, or code](/docs/ignoring-files-folders-code).                                                                                                         |
+| Semgrep Code is too noisy.                                                                  | Enable [cross-file (interfile) analysis](/docs/semgrep-code/semgrep-pro-engine-intro) or remove rules and rulesets through the [Policies page](/docs/semgrep-code/policies). |
+| I want my developers to see certain security issues in their pull request or merge request. | Configure [Comment mode](/docs/semgrep-code/policies#block-a-pr-or-mr-through-rule-modes) in the Policies page.                                                              |
+| I want to prevent developers from using dependencies with certain licenses.                 | Set up [license compliance](/docs/semgrep-supply-chain/license-compliance).                                                                                                  |
+| I want to receive AI assistance when I triage findings.                                     | Enable [Semgrep Assistant](/docs/semgrep-assistant/overview).                                                                                                                |
+| I want to enforce my organization's coding standards.                                       | Write a [custom rule](/docs/writing-rules/overview) and add it to your Policies page.                                                                                        |
+
+## Enable additional deployment features[​](#enable-additional-deployment-features "Direct link to Enable additional deployment features")
+
+| Concern                                                                                                   | Guide                                                                     |
+| --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| I want to receive notifications in my environment.                                                        | Set up [notifications](/docs/semgrep-appsec-platform/notifications).      |
+| I want my developers to use Semgrep on their IDE.                                                         | Install and set up available [IDE extensions](/docs/extensions/overview). |
+| I'm scanning too many projects (repositories onboarded to Semgrep) and want to group them somehow.        | [Tag your projects](/docs/semgrep-appsec-platform/tags).                  |
+| I'd like to manage access to the resources that developers can view or change in Semgrep AppSec Platform. | Configure [roles and users](/docs/deployment/teams).                      |
+
+## Stay up-to-date on new Semgrep features[​](#stay-up-to-date-on-new-semgrep-features "Direct link to Stay up-to-date on new Semgrep features")
+
+Subscribe to the:
+
+* [Semgrep release notes feed](https://semgrep.dev/docs/release-notes/rss.xml)
+* [Semgrep product updates feed](https://semgrep.dev/products/product-updates/rss/)
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Deployment](/docs/tags/deployment)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/deployment/beyond-core-deployment.md)
+
+Last updated on **May 8, 2025**

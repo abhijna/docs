@@ -1,0 +1,275 @@
+---
+title: "Prevent XSS for Flask"
+---
+
+* [python](/docs/tags/python)
+* [xss](/docs/tags/xss)
+
+Copy as md
+
+This is a cross-site scripting (XSS) prevention cheat sheet by Semgrep, Inc. It contains code patterns of potential XSS in an application. Instead of scrutinizing code for exploitable vulnerabilities, the recommendations in this cheat sheet pave a safe road for developers that mitigate the possibility of XSS in your code. By following these recommendations, you can be reasonably sure your code is free of XSS.
+
+Learn more about [Cross-site Scripting](/docs/learn/vulnerabilities/cross-site-scripting) vulnerability concepts.
+
+## Mitigation summary[​](#mitigation-summary "Direct link to Mitigation summary")
+
+In general, you should use `render_template()` when showing data to users. If you need HTML escaping, use `Markup()` and review each individual usage carefully. Once reviewed, mark the line with `# nosem`. Beware of putting data in dangerous locations in templates. And as always, run a security checker continuously on your code.
+
+Semgrep ruleset for this cheatsheet: [https://semgrep.dev/p/minusworld.flask-xss](https://semgrep.dev/p/minusworld.flask-xss)
+
+### Check your project using Semgrep[​](#check-your-project-using-semgrep "Direct link to Check your project using Semgrep")
+
+The following command runs an optimized set of rules for your project:
+
+```
+semgrep --config p/default
+```
+
+## 1. Server code: Unescaped variable enters template engine in Python code[​](#1-server-code-unescaped-variable-enters-template-engine-in-python-code "Direct link to 1. Server code: Unescaped variable enters template engine in Python code")
+
+### 1.A. **render\_template\_string()** with string formatting[​](#1a-render_template_string-with-string-formatting "Direct link to 1a-render_template_string-with-string-formatting")
+
+`render_template_string()` renders a Jinja2 template directly from a string. If the template is modified in any way, such as with string formatting, it creates a potential server-side template injection. Using `render_template()` is strictly safer because it does not create an opportunity to modify the template.
+
+Example:
+
+```
+render_template_string("<div>%s</div>" % request.args.get("name"))
+```
+
+#### References[​](#references "Direct link to References")
+
+* [Exploring SSTI in Flask/Jinja2](https://blog.nvisium.com/p263)
+* [Flask & Jinja2 SSTI Cheatsheet](https://pequalsnp-team.github.io/cheatsheet/flask-jinja2-ssti)
+
+#### Mitigation[​](#mitigation "Direct link to Mitigation")
+
+Ban `render_template_string()`. Alternatively, use `render_template()`.
+
+#### Semgrep rule[​](#semgrep-rule "Direct link to Semgrep rule")
+
+[python.flask.security.audit.render-template-string.render-template-string](https://semgrep.dev/r?q=python.flask.security.audit.render-template-string.render-template-string)
+
+### 1.B. **render\_template()** with unescaped file extension[​](#1b-render_template-with-unescaped-file-extension "Direct link to 1b-render_template-with-unescaped-file-extension")
+
+Flask only escapes templates with `.html`, `.htm`, `.xml`, or `.xhtml` extensions. This is not always obvious and could create cross-site scripting vulnerabilities.
+
+Example:
+
+```
+render_template("unsafe.jinja2")
+```
+
+#### References[​](#references-1 "Direct link to References")
+
+* [Flask documentation - Escaping behavior](https://flask.palletsprojects.com/en/1.1.x/templating/#jinja-setup)
+* [Bento check - Unescaped Template Extension](https://bento.dev/checks/flask/unescaped-file-extension/)
+* [Unescaped template extensions in Flask](https://semgrep.dev/blog/2020/bento-check-unescaped-template-extensions-in-flask/)
+
+#### Mitigation[​](#mitigation-1 "Direct link to Mitigation")
+
+Ban unescaped extensions. Alternatively, only use `.html` extensions for templates. If no escaping is needed, review each case and exempt with `# nosem`.
+
+#### Semgrep rule[​](#semgrep-rule-1 "Direct link to Semgrep rule")
+
+[python.flask.security.unescaped-template-extension.unescaped-template-extension](https://semgrep.dev/r?q=python.flask.security.unescaped-template-extension.unescaped-template-extension)
+
+### 1.C. Explicitly unescaping variables using **Markup()**[​](#1c-explicitly-unescaping-variables-using-markup "Direct link to 1c-explicitly-unescaping-variables-using-markup")
+
+`Markup()` disables HTML escaping for the returned content. This permits raw HTML to be rendered in a template, which could create a XSS vulnerability.
+
+Example:
+
+```
+flask.Markup(html_content)
+```
+
+#### References[​](#references-2 "Direct link to References")
+
+* [Flask autoescaping documentation](https://flask.palletsprojects.com/en/1.1.x/templating/#controlling-autoescaping)
+
+#### Mitigation[​](#mitigation-2 "Direct link to Mitigation")
+
+Ban `Markup()`. Alternatively, if needed, review each usage and exempt with `# nosem`.
+
+#### Semgrep rule[​](#semgrep-rule-2 "Direct link to Semgrep rule")
+
+[python.flask.security.xss.audit.explicit-unescape-with-markup.explicit-unescape-with-markup](https://semgrep.dev/r?q=python.flask.security.xss.audit.explicit-unescape-with-markup.explicit-unescape-with-markup)
+
+***
+
+## 2. Server code: Bypassing the template engine"[​](#2-server-code-bypassing-the-template-engine "Direct link to 2. Server code: Bypassing the template engine\"")
+
+### 2.A. Returning directly from a route[​](#2a-returning-directly-from-a-route "Direct link to 2.A. Returning directly from a route")
+
+Returning values directly from a route bypasses the template rendering engine, therefore bypassing any escaping. Use functionality provided by Flask to return content from routes, such as `render_template()` or `jsonify()`.
+
+Example:
+
+```
+@app.route("/index/<msg>")def index(msg):  return "Hello! " + msg
+```
+
+#### References[​](#references-3 "Direct link to References")
+
+* [Reflected server-side cross-site scripting](https://lgtm.com/rules/1506064236628/)
+
+#### Mitigation[​](#mitigation-3 "Direct link to Mitigation")
+
+Ban returning values directly from routes. Alternatively, use `render_template()` or `jsonify()`.
+
+#### Semgrep rule[​](#semgrep-rule-3 "Direct link to Semgrep rule")
+
+[python.flask.security.audit.directly-returned-format-string.directly-returned-format-string](https://semgrep.dev/r?q=python.flask.security.audit.directly-returned-format-string.directly-returned-format-string)
+
+### 2.B. Using a Jinja2 environment directly[​](#2b-using-a-jinja2-environment-directly "Direct link to 2.B. Using a Jinja2 environment directly")
+
+Flask already comes with a Jinja2 environment ready for use which can be invoked via the `render_template()` function. Using Jinja2 directly may bypass the escaping protections that are enabled in Flask by default.
+
+Example:
+
+```
+with open('template', 'r') as fin:  jinja2.Template(fin.read()).render()
+```
+
+#### References[​](#references-4 "Direct link to References")
+
+* [Bandit Check - Jinja2 Autoescape False](https://bandit.readthedocs.io/en/latest/plugins/b701_jinja2_autoescape_false.html)
+
+#### Mitigation[​](#mitigation-4 "Direct link to Mitigation")
+
+Ban using Jinja2 directly. Alternatively, use `render_template()`.
+
+#### Semgrep rule[​](#semgrep-rule-4 "Direct link to Semgrep rule")
+
+[python.flask.security.xss.audit.direct-use-of-jinja2.direct-use-of-jinja2](https://semgrep.dev/r?q=python.flask.security.xss.audit.direct-use-of-jinja2.direct-use-of-jinja2)
+
+***
+
+## 3. Templates: Variable explicitly unescaped[​](#3-templates-variable-explicitly-unescaped "Direct link to 3. Templates: Variable explicitly unescaped")
+
+### 3.A. Usage of the **| safe** filter[​](#3a-usage-of-the--safe-filter "Direct link to 3a-usage-of-the--safe-filter")
+
+The `| safe` filter disables HTML escaping for the provided content. This permits raw HTML to be rendered in a template, which could create a XSS vulnerability.
+
+Example:
+
+```
+{{ name | safe }}
+```
+
+#### References[​](#references-5 "Direct link to References")
+
+* [Flask autoescaping documentation](https://flask.palletsprojects.com/en/1.1.x/templating/#controlling-autoescaping)
+
+#### Mitigation[​](#mitigation-5 "Direct link to Mitigation")
+
+Ban `| safe`. Alternatively, use `Markup()` in Python code if necessary.
+
+#### Semgrep rule[​](#semgrep-rule-5 "Direct link to Semgrep rule")
+
+[python.flask.security.xss.audit.template-unescaped-with-safe.template-unescaped-with-safe](https://semgrep.dev/r?q=python.flask.security.xss.audit.template-unescaped-with-safe.template-unescaped-with-safe)
+
+### 3.B. Disabling autoescaping with **\{% autoescape false %}**[​](#3b-disabling-autoescaping-with--autoescape-false- "Direct link to 3b-disabling-autoescaping-with--autoescape-false-")
+
+The `{$ autoescape false %}` block disables autoescaping for whole portions of the template. Disabling autoescaping allows HTML characters to be rendered directly onto the page which could create XSS vulnerabilities.
+
+Example:
+
+```
+{% autoescape false %}
+```
+
+#### References[​](#references-6 "Direct link to References")
+
+* [Flask autoescaping documentation](https://flask.palletsprojects.com/en/1.1.x/templating/#controlling-autoescaping)
+
+#### Mitigation[​](#mitigation-6 "Direct link to Mitigation")
+
+Ban `{$ autoescape false %}`. Alternatively, use `Markup()` in Python code if necessary.
+
+#### Semgrep rule[​](#semgrep-rule-6 "Direct link to Semgrep rule")
+
+[python.flask.security.xss.audit.template-autoescape-off.template-autoescape-off](https://semgrep.dev/r?q=python.flask.security.xss.audit.template-autoescape-off.template-autoescape-off)
+
+***
+
+## 4. Templates: Variable in dangerous location[​](#4-templates-variable-in-dangerous-location "Direct link to 4. Templates: Variable in dangerous location")
+
+### 4.A. Unquoted variable in HTML attribute[​](#4a-unquoted-variable-in-html-attribute "Direct link to 4.A. Unquoted variable in HTML attribute")
+
+Unquoted template variables rendered into HTML attributes is a potential XSS vector because an attacker could inject JavaScript handlers which do not require HTML characters. An example handler might look like: `onmouseover=alert(1)`. HTML escaping will not mitigate this. The variable must be quoted to avoid this.
+
+Example:
+
+```
+<div class={{ classes }}></div>
+```
+
+#### References[​](#references-7 "Direct link to References")
+
+* [Flask cross-site scripting considerations](https://flask.palletsprojects.com/en/1.1.x/security/#cross-site-scripting-xss)
+
+#### Mitigation[​](#mitigation-7 "Direct link to Mitigation")
+
+Flag unquoted HTML attributes with Jinja expressions. Alternatively, always use quotes around HTML attributes.
+
+#### Semgrep rule[​](#semgrep-rule-7 "Direct link to Semgrep rule")
+
+[python.flask.security.xss.audit.template-unquoted-attribute-var.template-unquoted-attribute-var](https://semgrep.dev/r?q=python.flask.security.xss.audit.template-unquoted-attribute-var.template-unquoted-attribute-var)
+
+### 4.B. Variable in **href** attribute[​](#4b-variable-in-href-attribute "Direct link to 4b-variable-in-href-attribute")
+
+Template variables in a `href` value could still accept the `javascript:` URI. This could be a XSS vulnerability. HTML escaping will not prevent this. Use `url_for` to generate links.
+
+Example:
+
+```
+<a href="{{ link }}"></a>
+```
+
+#### References[​](#references-8 "Direct link to References")
+
+* [Flask cross-site scripting considerations](https://flask.palletsprojects.com/en/1.1.x/security/#cross-site-scripting-xss)
+
+#### Mitigation[​](#mitigation-8 "Direct link to Mitigation")
+
+Flag template variables in `href` attributes. Alternatively, use `url_for` to generate links.
+
+#### Semgrep rule[​](#semgrep-rule-8 "Direct link to Semgrep rule")
+
+[python.flask.security.xss.audit.template-href-var.template-href-var](https://semgrep.dev/r?q=python.flask.security.xss.audit.template-href-var.template-href-var)
+
+### 4.C Variable in **\<script>** block"[​](#4c-variable-in-script-block "Direct link to 4c-variable-in-script-block")
+
+Template variables placed directly into JavaScript or similar are now directly in a code execution context. Normal HTML escaping will not prevent the possibility of code injection because code can be written without HTML characters. This creates the potential for XSS vulnerabilities, or worse.
+
+#### References[​](#references-9 "Direct link to References")
+
+* [Template engines: Why default encoders are not enough](https://www.veracode.com/blog/secure-development/nodejs-template-engines-why-default-encoders-are-not-enough)
+* [`tojson` documentation](https://flask.palletsprojects.com/en/1.1.x/templating/#standard-filters)
+* [How to use `tojson` in a data attribute](https://stackoverflow.com/a/44840756)
+* [Safely including data for JavaScript in a Django template](https://adamj.eu/tech/2020/02/18/safely-including-data-for-javascript-in-a-django-template/)
+
+Example:
+
+```
+<script>var name = {{ name }};</script>
+```
+
+#### Mitigation[​](#mitigation-9 "Direct link to Mitigation")
+
+Ban template variables in `<script>` blocks. Alternatively, use the `tojson` filter inside a data attribute and `JSON.parse()` in JavaScript.
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [python](/docs/tags/python)
+* [xss](/docs/tags/xss)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/cheat-sheets/flask-xss.mdx)
+
+Last updated on **Sep 30, 2025**

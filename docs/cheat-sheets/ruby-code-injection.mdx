@@ -1,0 +1,87 @@
+---
+title: "Prevent Code Injection for Ruby"
+---
+
+* [ruby](/docs/tags/ruby)
+* [code-injection](/docs/tags/code-injection)
+
+Copy as md
+
+This is a code injection prevention cheat sheet by Semgrep, Inc. It contains code patterns of potential ways to run arbitrary code in an application. Instead of scrutinizing code for exploitable vulnerabilities, the recommendations in this cheat sheet pave a safe road for developers that mitigate the possibility of code injection in your code. By following these recommendations, you can be reasonably sure your code is free of code injection.
+
+Learn more about [Code Injection](/docs/learn/vulnerabilities/code-injection) vulnerability concepts.
+
+### Check your project using Semgrep[​](#check-your-project-using-semgrep "Direct link to Check your project using Semgrep")
+
+The following command runs an optimized set of rules for your project:
+
+```
+semgrep --config p/default
+```
+
+## 1. Evaluating code[​](#1-evaluating-code "Direct link to 1. Evaluating code")
+
+### 1.A. Evaluating code with `eval`[​](#1a-evaluating-code-with-eval "Direct link to 1a-evaluating-code-with-eval")
+
+Evaluating code can be dangerous if dynamic content is used as input. If this input originates from outside of the program it can lead to a code injection vulnerability.
+
+Examples:
+
+```
+# safestr = "hello"eval "str + ' Fred'"# vulnerablestr = "hello"user_input = "system('cat /etc/passwd')" # Value supplied by usereval "str + #{user_input}"
+```
+
+```
+class Thingend# safeThing.module_eval(%q{def hello() "Hello there!" end})# vulnerableuser_input = "system('cat /etc/passwd')" # Value supplied by userThing.module_eval(%q{def hello() "#{user_input}" end})
+```
+
+#### References[​](#references "Direct link to References")
+
+* [eval() documentation](https://www.rubydoc.info/stdlib/core/Kernel:eval)
+
+#### Mitigation[​](#mitigation "Direct link to Mitigation")
+
+* Don't use `eval()`, `class_eval()`, `module_eval()`, or `instance_eval()` if possible.
+* If you need to use `eval()`, `class_eval()`, `module_eval()`, or `instance_eval()` with non-literal values, ensure that executed content is not controllable by external sources.
+* If it's not possible, strip everything except alphanumeric characters from the input.
+
+#### Semgrep rule[​](#semgrep-rule "Direct link to Semgrep rule")
+
+[ruby.lang.security.no-eval.ruby-eval](https://semgrep.dev/r?q=ruby.lang.security.no-eval.ruby-eval)
+
+### 1.B. Evaluating code with RubyVM::InstructionSequence[​](#1b-evaluating-code-with-rubyvminstructionsequence "Direct link to 1.B. Evaluating code with RubyVM::InstructionSequence")
+
+The `InstructionSequence` class represents compiled instructions for the Ruby Virtual Machine. See details in [RubyVM::InstructionSequence documentation](https://ruby-doc.org/core-2.6/RubyVM/InstructionSequence.html). The `RubyVM` class itself is **not** intended for regular users. As the `RubyVM` class enables compiling code it may insecurely interpret user input. Providing user input to this class or its methods can result in a code injection vulnerability.
+
+Example:
+
+```
+# safeRubyVM::InstructionSequence.compile("a = 1 + 2")# vulnerableuser_input = "system('cat /etc/passwd')" # Value supplied by userRubyVM::InstructionSequence.compile("a = 1 + #{user_input}")
+```
+
+#### References[​](#references-1 "Direct link to References")
+
+* [RubyVM documentation](https://ruby-doc.org/core-2.7.0/RubyVM.html)
+* [RubyVM::InstructionSequence documentation](https://ruby-doc.org/core-2.6/RubyVM/InstructionSequence.html)
+
+#### Mitigation[​](#mitigation-1 "Direct link to Mitigation")
+
+* Don't use `RubyVM`, or `RubyVM::InstructionSequence` if possible.
+* If you need to use `RubyVM` or `RubyVM::InstructionSequence` with non-literal values or user input, ensure that inputs are from trusted sources.
+
+#### Semgrep rule[​](#semgrep-rule-1 "Direct link to Semgrep rule")
+
+[ruby.lang.security.no-eval.ruby-eval](https://semgrep.dev/r?q=ruby.lang.security.no-eval.ruby-eval)
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [ruby](/docs/tags/ruby)
+* [code-injection](/docs/tags/code-injection)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/cheat-sheets/ruby-code-injection.mdx)
+
+Last updated on **Sep 30, 2025**

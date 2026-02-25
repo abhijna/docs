@@ -1,0 +1,57 @@
+---
+title: "Run scans on"
+---
+
+* [Extensions](/docs/tags/extensions)
+
+Copy as md
+
+The [pre-commit framework](https://pre-commit.com/) can run `semgrep` when you commit changes. This is helpful in preventing secrets and security issues from leaking into your Git history.
+
+## Prerequisites[​](#prerequisites "Direct link to Prerequisites")
+
+[The `pre-commit` framework](https://pre-commit.com).
+
+## `pre-commit` with Semgrep Community Edition (no login)[​](#pre-commit-with-semgrep-community-edition-no-login "Direct link to pre-commit-with-semgrep-community-edition-no-login")
+
+Use these instructions to run `pre-commit` without logging in. You can still use custom rules or rules from the Semgrep Registry.
+
+Add the following to your `.pre-commit-config.yaml` file:
+
+```
+repos:- repo: https://github.com/semgrep/pre-commit  rev: 'v1.152.0'  hooks:    - id: semgrep      entry: semgrep      # Replace <SEMGREP_RULESET_URL> with your custom rule source      # or see https://semgrep.dev/explore to select a ruleset and copy its URL      args: ['--config', '<SEMGREP_RULESET_URL>', '--error', '--skip-unknown-extensions']
+```
+
+## `pre-commit` with your Semgrep AppSec Platform configuration[​](#pre-commit-with-your-semgrep-appsec-platform-configuration "Direct link to pre-commit-with-your-semgrep-appsec-platform-configuration")
+
+You can also run custom rules and rulesets from Semgrep AppSec Platform, similar to running `semgrep ci`.
+
+Ensure that you are logged in:
+
+1. Log in to your Semgrep account. Running this command launches a browser window, but you can also use the link that's returned in the CLI to proceed:
+
+   ```
+   semgrep login
+   ```
+
+2. In the **Semgrep CLI login**, click **Activate** to proceed.
+
+Add the following to your `.pre-commit-config.yaml` file:
+
+```
+repos:- repo: https://github.com/semgrep/pre-commit  rev: 'v1.152.0'  hooks:    - id:  semgrep-ci
+```
+
+For guidance on customizing Semgrep's behavior in pre-commit, see [Customize Semgrep in pre-commit](/docs/kb/integrations/customize-semgrep-precommit).
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Extensions](/docs/tags/extensions)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/extensions/pre-commit.md)
+
+Last updated on **Sep 17, 2025**

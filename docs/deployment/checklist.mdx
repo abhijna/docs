@@ -1,0 +1,357 @@
+---
+title: "Pre-deployment checklist"
+---
+
+* [Deployment](/docs/tags/deployment)
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+Copy as md
+
+Before starting the deployment setup, use this checklist to ensure that:
+
+* You and your organization agree on the **scope** of the deployment.
+* You are aware of **permissions** that Semgrep needs to provide certain functions.
+* You have **access** to the resources needed to carry out the deployment.
+
+<Info>
+  Ensure that your infrastructure meets all the [Prerequisites](/docs/prerequisites) to run Semgrep.
+</Info>
+
+## Stakeholders and deployment team[​](#stakeholders-and-deployment-team "Direct link to Stakeholders and deployment team")
+
+For medium-to-large teams, typically with more than 10 developers, coordinating with other departments before starting the deployment is crucial to an efficient roll-out. A complete deployment ensures that your licenses are fully used.
+
+Here are some teams or departments that may be responsible for parts of your Semgrep deployment:
+
+| Department     | Tasks related to deployment                                            |
+| -------------- | ---------------------------------------------------------------------- |
+| Infrastructure | SSO, CI/CD, and source code manager (SCM) configuration.               |
+| Engineering    | Repository ownership, displaying findings to developers in PRs or MRs. |
+| IT             | Firewall or VPN configuration.                                         |
+
+## Scope[​](#scope "Direct link to Scope")
+
+Scope refers to the breadth of deployment integration within your organization. The more users and repositories you onboard to Semgrep, the more crucial training becomes for **security champions** within your organization.
+
+Ensure that all stakeholders agree on:
+
+* Which users and departments will use Semgrep.
+* Which repositories you will scan with Semgrep.
+* How frequently you run Semgrep scans, such as daily or weekly, and at what time. This may affect other processes, such as PR approvals.
+* A timeframe for deployment. You may divide this into phases.
+
+**Deployment times** vary greatly depending on your processes and size.
+
+<Check>
+  Monorepos may take longer to finish scanning. Semgrep provides several options to improve performance, including piecemeal scanning of the monorepo. See [Scanning a monorepo in parts](/docs/kb/semgrep-ci/scan-monorepo-in-parts) for more information.
+</Check>
+
+## Roles[​](#roles "Direct link to Roles")
+
+Semgrep provides three primary roles: **admin**, **member**, and **readonly**.
+
+Deployments can also enable a fourth role, **manager**, through the [Teams](/docs/deployment/teams) feature, which provides project-level role-based access control.
+
+For **single-user deployments**, you are the sole **admin** of your deployment.
+
+For **multi-user deployments**, determine the following:
+
+* The administrators (**admins**) that own the Semgrep deployment.
+
+* For **members**, ensure that they have a sign-in method:
+
+  * SSO
+  * GitHub Cloud
+  * GitLab Cloud
+
+## Required permissions and access[​](#required-permissions-and-access "Direct link to Required permissions and access")
+
+The following checklist breaks down permissions required by Semgrep features.
+
+| Feature                                                          | Permission required                                                                                    |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Run Semgrep continuously in your CI workflows.                   | Adding or making changes to CI jobs. This includes committing configuration files for each repository. |
+|                                                                  | Defining environment variables and storing secrets.                                                    |
+| Run Semgrep continuously **without** changing your CI workflows. | Read access to user-selected repositories.                                                             |
+| Manage user authentication with SSO.                             | Viewing and editing of SSO configurations.                                                             |
+| Receive Slack notifications.                                     | Being a **Slack workspace owner**; alternatively, coordinate with the team responsible.                |
+| Send pull requests or merge requests to your SCM.                | Editing firewall or VPN allowlist for self-hosted repositories.                                        |
+
+### SCM-specific required permissions[​](#scm-specific-required-permissions "Direct link to SCM-specific required permissions")
+
+<Tabs>
+  <Tab title="Azure DevOps">
+    #### GitHub[​](#github "Direct link to GitHub")
+  </Tab>
+
+  <Tab title="Bitbucket">
+    | Feature                                                                               | Permission required     |
+    | ------------------------------------------------------------------------------------- | ----------------------- |
+    | Create CI jobs for repositories in bulk and detect GitHub repositories automatically. | Installing GitHub apps. |
+    | AI-assisted triage and recommendations.                                               | Code access.            |
+  </Tab>
+
+  <Tab title="GitHub">
+    #### GitLab[​](#gitlab "Direct link to GitLab")
+  </Tab>
+
+  <Tab title="GitLab">
+    | Feature                                 | Permission required                             |
+    | --------------------------------------- | ----------------------------------------------- |
+    | Merge request (MR) comments.            | Create personal access tokens.                  |
+    | AI-assisted triage and recommendations. | Create personal or project-level access tokens. |
+    |                                         | Read access to user-selected repositories.      |
+  </Tab>
+
+  <Tab title>
+    #### Bitbucket[​](#bitbucket "Direct link to Bitbucket")
+  </Tab>
+
+  <Tab title>
+    | Feature                     | Permission                               |
+    | --------------------------- | ---------------------------------------- |
+    | Pull request (PR) comments. | Able to create **repository variables**. |
+  </Tab>
+
+  <Tab title>
+    #### Azure DevOps[​](#azure-devops "Direct link to Azure DevOps")
+  </Tab>
+
+  <Tab title>
+    | Feature                     | Permission                                                                                                                                                      |
+    | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | Pull request (PR) comments. | Able to create [user personal access tokens](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate). |
+  </Tab>
+</Tabs>
+
+## Appendices[​](#appendices "Direct link to Appendices")
+
+### Permissions[​](#permissions "Direct link to Permissions")
+
+<Tabs>
+  <Tab title="Permissions for GitHub">
+    #### Permissions for GitHub[​](#permissions-for-github "Direct link to Permissions for GitHub")
+  </Tab>
+
+  <Tab title="Permissions for GitLab">
+    This section explains Semgrep AppSec Platform permissions that are requested in two different events:
+  </Tab>
+
+  <Tab title>
+    * When you first sign in through GitHub.
+    * When you first add, integrate, or onboard your repositories to Semgrep AppSec Platform.
+  </Tab>
+
+  <Tab title>
+    ##### Permissions when signing in with GitHub[​](#permissions-when-signing-in-with-github "Direct link to Permissions when signing in with GitHub")
+  </Tab>
+
+  <Tab title>
+    Semgrep AppSec Platform requests the following standard permissions set by GitHub when you first sign in. However, not all permissions are used by Semgrep AppSec Platform.
+  </Tab>
+
+  <Tab title>
+    <Accordion title="Click to review how Semgrep AppSec Platform uses permissions when signing in.">
+      * Verify your GitHub identity
+
+        Enables Semgrep AppSec Platform to read your GitHub profile data, such as your username.
+
+      * Know which resources you can access
+
+        Semgrep does not use or access any resources when first logging in. However, you can choose to share resources at a later point to add repositories into Semgrep AppSec Platform.
+
+      * Act on your behalf
+
+        Enables Semgrep AppSec Platform to perform certain tasks **only on resources that you choose to share with Semgrep AppSec Platform**. Semgrep AppSec Platform never uses this permission and never performs any actions on your behalf, even after you have installed `semgrep-app`. See [When does a GitHub App act on your behalf?](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/authorizing-github-apps) in GitHub documentation.
+    </Accordion>
+  </Tab>
+
+  <Tab title>
+    ##### Permissions when adding members or repositories into Semgrep AppSec Platform[​](#permissions-when-adding-members-or-repositories-into-semgrep-appsec-platform "Direct link to Permissions when adding members or repositories into Semgrep AppSec Platform")
+  </Tab>
+
+  <Tab title>
+    The public GitHub integration app is called [`semgrep-app`](https://github.com/apps/semgrep-app). This app is used to integrate Semgrep into user-selected GitHub repositories.
+  </Tab>
+
+  <Tab title>
+    <Accordion title="Click to review how Semgrep AppSec Platform uses permissions when adding members or repositories.">
+      * Reading metadata of the repositories you select
+
+        Enables Semgrep AppSec Platform to list repository names on the project setup page.
+
+      * Reading the list of organization members
+
+        Enables Semgrep AppSec Platform to determine who can manage your Semgrep organization based on your GitHub organization's members list.
+
+      * Reading and writing pull requests
+
+        Enables Semgrep AppSec Platform to comment about findings on pull requests.
+
+      * Reading and writing actions
+
+        Enables Semgrep AppSec Platform to cancel stuck jobs, rerun jobs, pull logs from jobs, and perform on-demand scanning.
+
+      * Reading [GitHub Checks](https://docs.github.com/en/rest/reference/checks)
+
+        Facilitates debugging of Semgrep AppSec Platform when configured out of [GitHub Actions](https://docs.github.com/en/actions).
+
+      * Reading and writing security events
+
+        Enables integration with GitHub Advanced Security (for example, to show Semgrep results).
+
+      * Reading and writing secrets
+
+        Enables automatically adding of the Semgrep AppSec Platform Token to your repository secrets when onboarding projects. Note: Semgrep cannot read the values of your existing or future secrets (only the names).
+
+      * Reading and writing 2 files
+
+        Enables Semgrep AppSec Platform to configure itself to run in CI by writing to `.github/workflows/semgrep.yml` and `.semgrepignore` files.
+
+      * Reading and writing workflows
+
+        Enables Semgrep AppSec Platform to configure itself to run in CI by writing to `.github/workflows/semgrep.yml`. GitHub allows writing to files within `.github/workflows/` directory only if this permission is granted along with "Writing a single file."
+
+      * Reading and writing pull requests
+
+        Write permissions allow Semgrep AppSec Platform to leave pull request comments about findings. Read permissions allow Semgrep AppSec Platform to automatically remove findings when the pull request that introduced them is closed without merging.
+    </Accordion>
+  </Tab>
+
+  <Tab title>
+    ##### Permissions when adding repositories into Semgrep AppSec Platform through Semgrep Managed Scans or using AI features[​](#permissions-when-adding-repositories-into-semgrep-appsec-platform-through-semgrep-managed-scans-or-using-ai-features "Direct link to Permissions when adding repositories into Semgrep AppSec Platform through Semgrep Managed Scans or using AI features")
+  </Tab>
+
+  <Tab title>
+    You can optionally create a private GitHub app, which follows the naming convention **Semgrep Code - YOUR\_ORG\_NAME**. This private app is used for the following features:
+  </Tab>
+
+  <Tab title>
+    * To add repositories to Semgrep AppSec Platform without changing your existing CI workflows. To learn more, see [Semgrep Managed Scans](/docs/deployment/managed-scanning/overview).
+    * To integrate AI-asssisted features into your Semgrep organization. To learn more, see [Semgrep Assistant overview](/docs/semgrep-assistant/overview).
+  </Tab>
+
+  <Tab title>
+    <Info>
+      These features require **read access** to your code.
+    </Info>
+  </Tab>
+
+  <Tab title>
+    <Accordion title="Click to review how Semgrep AppSec Platform uses permissions when adding repositories through .">
+      **Semgrep Managed Scans**
+
+      * Reading metadata of the repositories you select
+
+        Lets Semgrep list their names on the project setup page.
+
+      * Reading the list of organization members
+
+        Lets Semgrep determine who can manage your Semgrep organization based on your GitHub organization's members list.
+
+      * Writing (and reading) pull requests
+
+        Lets Semgrep comment about findings on pull requests.
+
+      * Writing (and reading) actions
+
+        Allows Semgrep AppSec Platform to cancel stuck jobs, rerun jobs, pull logs from jobs, and perform on-demand scanning.
+
+      * Reading checks
+
+        Facilitates debugging of Semgrep AppSec Platform when configured out of GitHub Actions
+
+      * Writing (and reading) security events.
+
+        Enables integration with GitHub Advanced Security (for example, to show Semgrep results)
+
+      * Writing (and reading) secrets
+
+        Enables automatic adding of the Semgrep AppSec Platform Token to your repository secrets when onboarding projects. Note: We cannot read the values of your existing or future secrets (only the names).
+
+      * Writing (and reading) 2 files
+
+        Lets Semgrep configure itself to run in CI by writing to .github/workflows/semgrep.yml and .semgrepignore.
+
+      * Writing (and reading) workflows
+
+        Lets Semgrep configure itself to run in CI by writing to .github/workflows/semgrep.yml. GitHub allows writing to files within .github/workflows/ only if this permission is granted along with "Writing a single file."
+
+      * Read source code of the repositories you select
+
+        Allows Semgrep Assistant to fetch source code files on-demand to construct AI prompts.
+    </Accordion>
+  </Tab>
+
+  <Tab title>
+    #### Permissions for GitLab[​](#permissions-for-gitlab "Direct link to Permissions for GitLab")
+  </Tab>
+
+  <Tab title>
+    Semgrep requires the following permissions (scopes) to enable the authentication of a session:
+  </Tab>
+
+  <Tab title>
+    * `openid`
+    * `email`
+    * `profile`
+    * `API`
+  </Tab>
+</Tabs>
+
+### IP addresses[​](#ip-addresses "Direct link to IP addresses")
+
+If you are behind a firewall, are using a virtual private network (VPN), or have network restrictions regarding access, you may need to add the following IP addresses to the **ingress** allowlist and **egress** allowlist:
+
+```
+# Ingress IP addresses (from Semgrep to your infrastructure)# and egress IP addresses (from your infrastructure to Semgrep)35.166.231.23552.35.248.24652.34.137.11044.225.64.41
+```
+
+#### Additional egress IP addresses[​](#additional-egress-ip-addresses "Direct link to Additional egress IP addresses")
+
+You must also add **CloudFront IP addresses** to your **egress** allowlist. Refer to [Locations and IP address ranges of CloudFront edge servers](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/LocationsOfEdgeServers.html) for a list of IP addresses.
+
+#### Allowlists when using Semgrep Network Broker[​](#allowlists-when-using-semgrep-network-broker "Direct link to Allowlists when using Semgrep Network Broker")
+
+The [Semgrep Network Broker](/docs/semgrep-ci/network-broker) facilities secure access with Semgrep, and its use can replace the allowlisting of the IP addresses required for ingress. The Network Broker, however, only facilitates requests from Semgrep to your network and *doesn't* assist with requests originating from your network, including those from your network to Semgrep.
+
+In other words, the only address you would have to allow inbound is `wireguard.semgrep.dev` on UDP port `51820`, or your tenant's equivalent. Depending on how restrictive your network is, you may also need to modify your allowlist to include the egress IP addresses provided in [IP addresses](#ip-addresses).
+
+#### Features that require inbound network connectivity[​](#features-that-require-inbound-network-connectivity "Direct link to Features that require inbound network connectivity")
+
+* [Source code manager connections](/docs/deployment/connect-scm#connect-to-on-premise-orgs-and-projects)
+* [PR and MR comments](/docs/category/pr-or-mr-comments)
+* [Semgrep Managed Scans](/docs/deployment/managed-scanning/overview)
+* [Semgrep Assistant](/docs/semgrep-assistant/getting-started)
+
+### Semgrep versions[​](#semgrep-versions "Direct link to Semgrep versions")
+
+Many improvements to the Semgrep AppSec Platform experience only work with up-to-date Semgrep CLI versions. As such, Semgrep AppSec Platform only supports the 10 most recent minor versions of Semgrep CLI. For example, if the latest release was 1.60.0, all versions greater than 1.50.0 are supported, while earlier versions, such as 1.49.0, can be deprecated or can result in failures.
+
+To update Semgrep, see [Update Semgrep](/docs/update).
+
+Docker users: use [the **latest** tag](https://hub.docker.com/r/semgrep/semgrep/tags?page=1\&name=latest) to ensure you are up to date.
+
+### Semgrep AppSec Platform session details[​](#semgrep-appsec-platform-session-details "Direct link to Semgrep AppSec Platform session details")
+
+* The time before you need to reauthenticate to Semgrep AppSec Platform is 7 days.
+* A Semgrep AppSec Platform session token is valid for 7 days.
+* This session timeout is not configurable.
+* Semgrep AppSec Platform does not use cookies; instead it uses `localStorage` to store access tokens. The data in `localStorage` expires every 7 days.
+
+## Additional resources[​](#additional-resources "Direct link to Additional resources")
+
+Check out [How to introduce Semgrep to your organization](https://blog.trailofbits.com/2024/01/12/how-to-introduce-semgrep-to-your-organization/) from Trail of Bits for tips on how to evaluate and deploy Semgrep for your org.
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Deployment](/docs/tags/deployment)
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/deployment/deployment-checklist.md)
+
+Last updated on **Jan 8, 2026**

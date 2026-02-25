@@ -1,0 +1,37 @@
+---
+title: "Metavariable analysis"
+---
+
+* [Rule writing](/docs/tags/rule-writing)
+
+Copy as md
+
+Semgrep developed metavariable analysis to support several metavariable inspection techniques that are difficult to express with existing rules, but have "simple" binary classifier behavior. Currently, this syntax supports two analyzers: `redos` and `entropy`.
+
+## ReDoS[​](#redos "Direct link to ReDoS")
+
+```
+metavariable-analysis:    analyzer: redos    metavariable: $VARIABLE
+```
+
+Poorly constructed regular expressions that exhibit exponential runtime when fed specifically crafted inputs can cause RegEx denial of service. The `redos` analyzer uses known RegEx anti-patterns to determine if the target expression is potentially vulnerable to catastrophic backtracking.
+
+## Entropy[​](#entropy "Direct link to Entropy")
+
+```
+metavariable-analysis:    analyzer: entropy    metavariable: $VARIABLE
+```
+
+Entropy is a common approach for detecting secret strings. Many existing tools utilize a combination of entropy calculations and regular expressions (RegEx) for secret detection. This analyzer returns `true` if a metavariable has high entropy, or randomness, relative to the English language.
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Rule writing](/docs/tags/rule-writing)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/writing-rules/metavariable-analysis.md)
+
+Last updated on **Oct 15, 2025**

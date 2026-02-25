@@ -1,0 +1,45 @@
+---
+title: "Packages in the Semgrep docker image"
+---
+
+* [Deployment](/docs/tags/deployment)
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+Copy as md
+
+## Packages[​](#packages "Direct link to Packages")
+
+In addition to the `semgrep` binary, the [`semgrep/semgrep:latest` docker image](https://hub.docker.com/r/semgrep/semgrep/tags) contains the following packages:
+
+* `bash`
+* `jq`
+* `curl`
+* Python 3.11 (`alpine:3.22` base image)
+
+The Alpine 3.22 docker image includes additional packages that can change without notice. To review them, run `docker run alpine:3.22 apk list`.
+
+<Warning>
+  * Do **not** rely on the presence of packages from the Alpine docker image in your CI workflows. They are not guaranteed to be included in the future and are not managed by Semgrep.
+  * `jq` and `curl` may be removed in future Semgrep releases. You can install them directly in the Docker image if necessary. For example:
+
+  ```
+    job:    container: semgrep/semgrep:latest    runs-on: ubuntu-latest-16-core    steps:      - uses: actions/checkout@v3      - name: Install dependencies        run: apk add bash jq curl      - run: semgrep scan --json ... | jq ...
+  ```
+</Warning>
+
+## Previous incidents[​](#previous-incidents "Direct link to Previous incidents")
+
+* [Semgrep v.1.66.0](https://github.com/semgrep/semgrep/releases/tag/v1.66.0) removed `bash`, `jq`, and `curl` to reduce the attack surface of the Semgrep docker image. They were subsequently re-added for future Semgrep releases.
+
+***
+
+Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
+
+**Tags:**
+
+* [Deployment](/docs/tags/deployment)
+* [Semgrep AppSec Platform](/docs/tags/semgrep-app-sec-platform)
+
+[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/semgrep-ci/packages-in-semgrep-docker.md)
+
+Last updated on **Nov 7, 2025**
