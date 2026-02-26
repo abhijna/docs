@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "aspen",
+  "theme": "sequoia",
   "name": "Semgrep",
   "colors": {
     "primary": "#2ACFA6",
@@ -17,17 +17,7 @@
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
-      {
-        "tab": "Docs home",
-        "groups": [
-          {
-            "group": "Docs home",
-            "pages": [
-              "docs/index"
-            ]
-          }
-        ]
-      },
+
       {
         "tab": "What's Semgrep",
         "groups": [
@@ -484,6 +474,7 @@
   },
   "logo": {
     "light": "/images/docs/img/semgrep-icon-text-horizontal.svg",
-    "dark": "/images/docs/img/semgrep-icon-text-horizontal-dark.svg"
+    "dark": "/images/docs/img/semgrep-icon-text-horizontal-dark.svg",
+    "href": "/docs/index"
   }
 }
