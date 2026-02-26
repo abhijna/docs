@@ -16,12 +16,37 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "anchors": [
+    "tabs": [
       {
-        "anchor": "Release notes",
-        "tabs": [
+        "tab": "Getting started",
+        "icon": "rocket",
+        "groups": [
           {
-            "tab": "Scan with Semgrep",
+            "group": "Overview",
+            "pages": [
+              "docs/index",
+              "docs/introduction"
+            ]
+          },
+          {
+            "group": "Quickstart",
+            "pages": [
+              "docs/getting-started/quickstart-managed-scans",
+              "docs/getting-started/quickstart-ce"
+            ]
+          },
+          {
+            "group": "Prerequisites",
+            "pages": [
+              "docs/prerequisites",
+              "docs/getting-started/scm-support"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Scan with Semgrep",
+        "icon": "shield-check",
             "groups": [
               {
                 "group": "Quickstart",
