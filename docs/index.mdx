@@ -1,86 +1,170 @@
 ---
-title: "Semgrep docs"
+title: "Semgrep Docs"
+sidebarTitle: "Home"
+description: "Find bugs and reachable dependency vulnerabilities in code. Enforce your code standards on every commit."
+mode: custom
 ---
 
+<div style={{ position: 'relative', zIndex: 1 }}>
 
+<div className="relative w-full flex items-center justify-center" style={{ height: '24rem', overflow: 'hidden'}}>
 
-Copy as md
+<div id="background-div" className="absolute inset-0 h-full bg-[#00000000] bg-cover bg-center"></div>
 
-[![Semgrep themed logo](img/semgrep.svg#no-shadow)![Semgrep themed logo](img/semgrep.svg#no-shadow)](https://semgrep.dev)
+<div style={{ position: 'absolute', textAlign: 'center', padding: '0 1rem' }}>
+  <img
+    noZoom
+    src="/images/semgrep.svg"
+    alt="Semgrep Logo"
+    style={{
+      height: '3rem',
+      margin: '0 auto 1rem auto',
+      display: 'block'
+    }}
+  />
+  <div
+    className="text-5xl font-bold w-full leading-[1.2] tracking-tight text-[#24434f] dark:text-white"
+  >
+  <h1>Semgrep <span style={{ color: '#624def' }}>Docs</span></h1>
+  </div>
 
-##### Find bugs and reachable dependency vulnerabilities in code. Enforce your code standards on every commit.
+  <p className="text-lg text-[#24434f] dark:text-white" style={{ fontWeight: '500', maxWidth: '40rem', margin: '0 auto', marginTop: '0.5rem'}}>
+    Find bugs and reachable dependency vulnerabilities in code. Enforce your code standards on every commit.
+  </p>
 
-### Scan with Semgrep AppSec Platform
+  <div className="flex items-center justify-center" style={{ maxWidth: '800px', margin: '0 auto' }}>
+    <button
+      type="button"
+      className="hidden w-full lg:flex items-center text-sm leading-6 py-4 pl-4 pr-4 text-gray-500 rounded-full"
+      id="home-search-entry"
+      style={{
+        marginTop: '2rem',
+        maxWidth: '40rem',
+        background: '#FFF',
+        boxShadow: '0px 1px 4px 0px rgba(8, 9, 10, 0.25), 0px 0px 0px 4px rgba(255, 255, 255, 0.20)',
+        cursor: 'pointer',
+        textAlign: 'left',
+      }}
+      onClick={()=> document.getElementById('search-bar-entry').click()}
+    >
+      <svg
+        className="h-4 w-4 ml-1.5 flex-none bg-primary hover:bg-gray-600 dark:bg-primary-dark dark:hover:bg-white/70"
+        style={{
+        marginRight: '0.5rem',
+        maskImage:
+          'url("https://mintlify.b-cdn.net/v6.5.1/solid/magnifying-glass.svg")',
+        maskRepeat: 'no-repeat',
+        maskPosition: 'center center',
+        }}
+      />
+      Search or ask...
+    </button>
+  </div>
+</div>
+</div>
 
-Deploy static application security testing (SAST), software composition analysis (SCA), and secrets scans from one platform.
+<div
+  style={{marginTop: '0rem', marginBottom: '8rem', maxWidth: '70rem', marginLeft: 'auto',
+  marginRight: 'auto', paddingLeft: '1.25rem',
+  paddingRight: '1.25rem' }}
+>
 
-<CardGroup>
-  <Card title="Get startedRun your first Semgrep scan." href="/docs/getting-started/quickstart-managed-scans">
-    ![](/images/docs/docs/img/icon-first-scan.svg)
+<div className='flex flex-col gap-2 mb-6 mt-10 justify-center items-left'>
+<h2 className='text-3xl font-bold text-[#24434f] dark:text-white'>Scan with Semgrep AppSec Platform</h2>
+<p className='text-xl text-[#24434f] dark:text-white'>Deploy static application security testing (SAST), software composition analysis (SCA), and secrets scans from a unified platform.</p>
+</div>
 
-    ######
+<CardGroup cols={2}>
+  <Card
+    title="Get started"
+    icon="rocket"
+    href="/quickstart"
+  >
+    Run your first Semgrep scan
   </Card>
-
-  <Card title="Deploy SemgrepDeploy Semgrep to your organization quickly and at scale." href="/docs/deployment/core-deployment">
-    ![](/images/docs/docs/img/icon-deploy.svg)
-
-    ######
+  <Card
+    title="Deploy Semgrep"
+    icon="cloud"
+    href="/getting-started/deployment"
+  >
+    Deploy Semgrep to your organization quickly and at scale
   </Card>
-
-  <Card title="Triage and remediateTriage and remediate findings; fine-tune guardrails for developers." href="/docs/semgrep-code/triage-remediation">
-    ![](/images/docs/docs/img/icon-triage.svg)
-
-    ######
+  <Card
+    title="Triage and remediate"
+    icon="list-check"
+    href="/quickstart"
+  >
+    Triage findings and refine your guardrails
   </Card>
-
-  <Card title="Write rulesEnforce your organization’s coding standards with custom rules." href="/docs/writing-rules/overview">
-    ![](/images/docs/docs/img/icon-rules.svg)
-
-    ######
+  <Card
+    title="Write rules"
+    icon="pen"
+    href="/rules/overview"
+  >
+    Enforce your organization's coding standards with custom rules
   </Card>
 </CardGroup>
 
-### Supported languages
+<div className='flex flex-col gap-2 mb-6 mt-10 justify-center items-left'>
+<h2 className='text-3xl font-bold text-[#24434f] dark:text-white'>Supported languages</h2>
 
-| Product              | Languages                                                                                                                                                                                                                                                                                                                                                                                       |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Semgrep Code         | **Generally available (GA)**&#x43; and C++ • C# • Generic • Go • Java • JavaScript • JSON • Kotlin • Python • TypeScript • Ruby • Rust • JSX • PHP • Scala • Swift • Terraform **Beta**APEX • Elixir **Experimental**Bash • Cairo • Circom • Clojure • Dart • Dockerfile • Hack • HTML • Jsonnet • Julia • Lisp • Lua • Move on Aptos • Move on Sui • OCaml• R • Scheme • Solidity • YAML • XML |
-| Semgrep Supply Chain | **Generally available reachability**C# • Go • Java • JavaScript and TypeScript • Kotlin • PHP • Python • Ruby • Scala • Swift **Languages without support for reachability analysis**Dart • Elixir • Rust                                                                                                                                                                                       |
-| Semgrep Secrets      | Language-agnostic; can detect 630+ types of credentials or keys.                                                                                                                                                                                                                                                                                                                                |
+<table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid #e5e7eb', marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+  <thead>
+    <tr style={{ backgroundColor: '#f9fafb', borderBottom: '2px solid #e5e7eb' }}>
+      <th style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600', borderRight: '1px solid #e5e7eb', width: '25%' }} className="text-[#24434f] dark:text-white dark:bg-gray-800">Product</th>
+      <th style={{ padding: '12px 16px', textAlign: 'left', fontWeight: '600' }} className="text-[#24434f] dark:text-white dark:bg-gray-800">Languages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+      <td style={{ padding: '16px', verticalAlign: 'top', borderRight: '1px solid #e5e7eb', fontWeight: '600' }} className="text-[#24434f] dark:text-white">Semgrep Code</td>
+      <td style={{ padding: '16px', verticalAlign: 'top' }} className="text-[#24434f] dark:text-white">
+        <div style={{ marginBottom: '12px' }}>
+          <strong>Generally available (GA)</strong><br/>
+          C and C++ • C# • Generic • Go • Java • JavaScript • JSON • Kotlin • Python • TypeScript • Ruby • Rust • JSX • PHP • Scala • Swift • Terraform
+        </div>
+        <div style={{ marginBottom: '12px' }}>
+          <strong>Beta</strong><br/>
+          APEX • Elixir
+        </div>
+        <div>
+          <strong>Experimental</strong><br/>
+          Bash • Cairo • Circom • Clojure • Dart • Dockerfile • Hack • HTML • Jsonnet • Julia • Lisp • Lua • Move on Aptos • Move on Sui • OCaml • R • Scheme • Solidity • YAML • XML
+        </div>
+      </td>
+    </tr>
+    <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+      <td style={{ padding: '16px', verticalAlign: 'top', borderRight: '1px solid #e5e7eb', fontWeight: '600' }} className="text-[#24434f] dark:text-white">Semgrep Supply Chain</td>
+      <td style={{ padding: '16px', verticalAlign: 'top' }} className="text-[#24434f] dark:text-white">
+        <div style={{ marginBottom: '12px' }}>
+          <strong>Generally available reachability</strong><br/>
+          C# • Go • Java • JavaScript and TypeScript • Kotlin • PHP • Python • Ruby • Scala • Swift
+        </div>
+        <div>
+          <strong>Languages without support for reachability analysis</strong><br/>
+          Dart • Elixir • Rust
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td style={{ padding: '16px', verticalAlign: 'top', borderRight: '1px solid #e5e7eb', fontWeight: '600' }} className="text-[#24434f] dark:text-white">Semgrep Secrets</td>
+      <td style={{ padding: '16px', verticalAlign: 'top' }} className="text-[#24434f] dark:text-white">
+        Language-agnostic; can detect 630+ types of credentials or keys.
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p className='text-l text-[#24434f] dark:text-white'>See the <a href="/getting-started/supported-languages" style={{ color: '#624def', textDecoration: 'none', fontWeight: '500' }} onMouseOver={(e) => e.target.style.textDecoration = 'underline'} onMouseOut={(e) => e.target.style.textDecoration = 'none'}>Supported languages documentation</a> for more details.</p>
+</div>
 
-See the [Supported languages](/docs/supported-languages#language-maturity-summary) documentation for more details.
+<div className='flex flex-col gap-2 mb-6 mt-10 justify-center items-left'>
+<h2 className='text-3xl font-bold text-[#24434f] dark:text-white'>Latest release notes</h2>
+<ContentList
+  filter={{ tags: ['release-notes'] }}
+  sort={{ key: 'date', direction: 'descending' }}
+  limit={1}
+/>
+</div>
 
-### January 2026 release notes summary
-
-* Semgrep AppSec Platform's **Findings** page displays more descriptive rule group names, and the **Finding Details** page displays more descriptive rule names. For example, `sequelize-express` is now `SQL injection in Sequelize with Express`.
-
-* **CLI**:
-
-  * Improved the performance of scan planning by reducing the cost of re-hashing `Target` objects. Semgrep's performance improvement on scans of large projects is proportional to the number of files in the project.
-  * In `--debug` mode, Semgrep warns you if you attempt to run a parallel scan with a larger value for `-j`/`--jobs` than the number of CPUs Semgrep has detected as available for use.
-  * Semgrep now provides a suggested starting value for `-j`/`--jobs`.
-  * `semgrep login` now supports the use of `--force`, which ignores existing tokens and starts a new login session.
-
-* Supply Chain's reachability analysis now covers all **critical** and **high** severity CVEs from supported sources starting in 2017 across **all** supported languages.
-
-* Supply Chain now supports Gradle lockfiles of the form `gradle*.lockfile`. Previously, only files with the exact name `gradle.lockfile` were supported.
-
-* Supply Chain's dependency search now allows you to search for one or more packages using:
-
-  * The name of the package
-  * An exact version number
-  * A range of version numbers
-
-* Members can now create suggested memories for Assistant when triaging findings in Semgrep AppSec Platform. Previously, only admins could do so.
-
-[See the latest release notes](/docs/release-notes)
-
-[Subscribe to RSS feed](https://semgrep.dev/docs/release-notes/rss.xml)
-
-***
-
-Not finding what you need in this doc? Ask questions in our [Community Slack group](https://go.semgrep.dev/slack), or see [Support](/docs/support/) for other ways to get help.
-
-[Edit this page](https://github.com/semgrep/semgrep-docs/edit/main/docs/index.md)
-
-Last updated on **Feb 4, 2026**
+</div>
+</div>

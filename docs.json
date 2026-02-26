@@ -3,105 +3,59 @@
   "theme": "aspen",
   "name": "Semgrep",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#55D799",
+    "primary": "#2ACFA6",
+    "light": "#AFEAD8",
     "dark": "#0D9373"
+  },
+  "background": {
+    "color": {
+      "light": "#f8f9f9",
+      "dark": "#131a2c"
+    },
+    "decoration": "gradient"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
+        "tab": "Docs home",
+        "groups": [
+          {
+            "group": "Docs home",
+            "pages": [
+              "docs/index"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "What's Semgrep",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "docs/introduction"
+            ]
+          },
+          {
+            "group": "Semgrep CE",
+            "pages": [
+              "docs/getting-started/quickstart-ce",
+              "docs/customize-semgrep-ce",
+              "docs/semgrep-ce-languages",
+              "docs/deployment/oss-deployment",
+              "docs/contributing/semgrep-philosophy",
+              "docs/semgrep-pro-vs-oss",
+              "docs/faq/comparisons/opengrep"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Scan with Semgrep",
         "groups": [
           {
-            "group": "Quickstart",
-            "pages": [
-              "docs/getting-started/quickstart"
-            ]
-          },
-          {
-            "group": "Quickstart",
-            "pages": [
-              "docs/getting-started/quickstart"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Write rules",
-        "groups": [
-          {
-            "group": "Overview",
-            "pages": [
-              "docs/writing-rules/overview"
-            ]
-          },
-          {
-            "group": "Overview",
-            "pages": [
-              "docs/writing-rules/overview"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Learning guides",
-        "groups": [
-          {
-            "group": "Learn",
-            "pages": [
-              "docs/learn"
-            ]
-          },
-          {
-            "group": "Security Foundations",
-            "pages": [
-              "docs/learn/security-foundations/overview",
-              "docs/learn/security-foundations/sast/overview",
-              "docs/learn/security-foundations/supply-chain-security",
-              "docs/learn/security-foundations/security-testing-workflow"
-            ]
-          },
-          {
-            "group": "Vulnerabilities",
-            "pages": [
-              "docs/learn/vulnerabilities/overview",
-              "docs/learn/vulnerabilities/code-injection",
-              "docs/learn/vulnerabilities/command-injection",
-              "docs/learn/vulnerabilities/cross-site-scripting",
-              "docs/learn/vulnerabilities/insecure-deserialization",
-              "docs/learn/vulnerabilities/idor",
-              "docs/learn/vulnerabilities/open-redirect",
-              "docs/learn/vulnerabilities/server-side-request-forgery",
-              "docs/learn/vulnerabilities/sql-injection",
-              "docs/learn/vulnerabilities/xml-security"
-            ]
-          },
-          {
-            "group": "Python",
-            "pages": [
-              "docs/learn/vulnerabilities/insecure-deserialization/python"
-            ]
-          },
-          {
-            "group": "Learn",
-            "pages": [
-              "docs/learn"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Semgrep docs",
-        "groups": [
-          {
-            "group": "Docs/",
-            "pages": [
-              "docs/"
-            ]
-          },
-          {
-            "group": "Quickstart Managed Scans",
+            "group": "Quickstart managed scans",
             "pages": [
               "docs/getting-started/quickstart-managed-scans"
             ]
@@ -113,7 +67,7 @@
             ]
           },
           {
-            "group": "Scm Support",
+            "group": "SCM support",
             "pages": [
               "docs/getting-started/scm-support"
             ]
@@ -245,7 +199,7 @@
             ]
           },
           {
-            "group": "Overview",
+            "group": "Semgrep Assistant overview",
             "pages": [
               "docs/semgrep-assistant/overview",
               "docs/semgrep-assistant/metrics",
@@ -253,7 +207,7 @@
             ]
           },
           {
-            "group": "Getting started",
+            "group": "Semgrep Assistant getting started",
             "pages": [
               "docs/semgrep-assistant/getting-started",
               "docs/semgrep-assistant/customize",
@@ -261,87 +215,20 @@
             ]
           },
           {
-            "group": "Analyze",
+            "group": "Semgrep Assistant analyze",
             "pages": [
               "docs/semgrep-assistant/analyze"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Write Semgrep rules",
+        "groups": [
           {
-            "group": "Get started",
+            "group": "Overview",
             "pages": [
-              "docs/getting-started/quickstart-ce",
-              "docs/customize-semgrep-ce"
-            ]
-          },
-          {
-            "group": "Semgrep Ce Languages",
-            "pages": [
-              "docs/semgrep-ce-languages"
-            ]
-          },
-          {
-            "group": "Oss Deployment",
-            "pages": [
-              "docs/deployment/oss-deployment"
-            ]
-          },
-          {
-            "group": "About Semgrep CE",
-            "pages": [
-              "docs/contributing/semgrep-philosophy",
-              "docs/semgrep-pro-vs-oss",
-              "docs/faq/comparisons/opengrep"
-            ]
-          },
-          {
-            "group": "CI references",
-            "pages": [
-              "docs/category/ci-references-1",
-              "docs/semgrep-ci/ci-environment-variables",
-              "docs/semgrep-ci/sample-ci-configs",
-              "docs/semgrep-ci/findings-ci",
-              "docs/semgrep-ci/packages-in-semgrep-docker"
-            ]
-          },
-          {
-            "group": "Language reference",
-            "pages": [
-              "docs/category/language-reference",
-              "docs/references/language-maturity-levels",
-              "docs/references/feature-definitions",
-              "docs/semgrep-code/java"
-            ]
-          },
-          {
-            "group": "Glossaries",
-            "pages": [
-              "docs/category/glossaries-1",
-              "docs/semgrep-code/glossary",
-              "docs/semgrep-supply-chain/glossary"
-            ]
-          },
-          {
-            "group": "Semgrepignore V2 Reference",
-            "pages": [
-              "docs/semgrepignore-v2-reference"
-            ]
-          },
-          {
-            "group": "Cli Reference",
-            "pages": [
-              "docs/cli-reference"
-            ]
-          },
-          {
-            "group": "Json And Sarif",
-            "pages": [
-              "docs/semgrep-appsec-platform/json-and-sarif"
-            ]
-          },
-          {
-            "group": "Docs/",
-            "pages": [
-              "docs/"
+              "docs/writing-rules/overview"
             ]
           },
           {
@@ -377,19 +264,19 @@
             ]
           },
           {
-            "group": "Private Rules",
+            "group": "Private rules",
             "pages": [
               "docs/writing-rules/private-rules"
             ]
           },
           {
-            "group": "Testing Rules",
+            "group": "Testing rules",
             "pages": [
               "docs/writing-rules/testing-rules"
             ]
           },
           {
-            "group": "Rules",
+            "group": "Rules troubleshooting",
             "pages": [
               "docs/troubleshooting/rules"
             ]
@@ -399,27 +286,20 @@
             "pages": [
               "docs/writing-rules/glossary"
             ]
-          },
-          {
-            "group": "Rules",
-            "pages": [
-              "docs/semgrep-secrets/rules"
-            ]
-          },
-          {
-            "group": "Validators",
-            "pages": [
-              "docs/semgrep-secrets/validators"
-            ]
-          },
-          {
-            "group": "Docs/",
-            "pages": [
-              "docs/"
-            ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Semgrep for developers",
+        "groups": [
           {
             "group": "Overview",
+            "pages": [
+              "docs/for-developers/overview"
+            ]
+          },
+          {
+            "group": "Cheat sheets overview",
             "pages": [
               "docs/cheat-sheets/overview"
             ]
@@ -469,47 +349,125 @@
               "docs/cheat-sheets/ruby-command-injection",
               "docs/cheat-sheets/rails-xss"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "References",
+        "groups": [
           {
-            "group": "Docs/",
+            "group": "CI references",
             "pages": [
-              "docs/"
+              "docs/category/ci-references-1",
+              "docs/semgrep-ci/ci-environment-variables",
+              "docs/semgrep-ci/sample-ci-configs",
+              "docs/semgrep-ci/findings-ci",
+              "docs/semgrep-ci/packages-in-semgrep-docker"
             ]
           },
           {
-            "group": "Introduction",
+            "group": "Language reference",
             "pages": [
-              "docs/introduction"
-            ]
-          },
-          {
-            "group": "Overview",
-            "pages": [
-              "docs/for-developers/overview"
-            ]
-          },
-          {
-            "group": "References",
-            "pages": [
-              "docs/category/ci-references",
-              "docs/category/language-specific-features",
-              "docs/category/glossaries",
+              "docs/category/language-reference",
               "docs/references/language-maturity-levels",
-              "docs/references/feature-definitions"
+              "docs/references/feature-definitions",
+              "docs/semgrep-code/java"
             ]
           },
           {
-            "group": "Kb",
+            "group": "Glossaries",
+            "pages": [
+              "docs/category/glossaries-1",
+              "docs/semgrep-code/glossary",
+              "docs/semgrep-supply-chain/glossary"
+            ]
+          },
+          {
+            "group": "Semgrepignore v2 reference",
+            "pages": [
+              "docs/semgrepignore-v2-reference"
+            ]
+          },
+          {
+            "group": "CLI reference",
+            "pages": [
+              "docs/cli-reference"
+            ]
+          },
+          {
+            "group": "JSON and SARIF",
+            "pages": [
+              "docs/semgrep-appsec-platform/json-and-sarif"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Semgrep learning guides",
+        "groups": [
+          {
+            "group": "Learn",
+            "pages": [
+              "docs/learn"
+            ]
+          },
+          {
+            "group": "Security foundations",
+            "pages": [
+              "docs/learn/security-foundations/overview",
+              "docs/learn/security-foundations/sast/overview",
+              "docs/learn/security-foundations/supply-chain-security",
+              "docs/learn/security-foundations/security-testing-workflow"
+            ]
+          },
+          {
+            "group": "Vulnerabilities",
+            "pages": [
+              "docs/learn/vulnerabilities/overview",
+              "docs/learn/vulnerabilities/code-injection",
+              "docs/learn/vulnerabilities/command-injection",
+              "docs/learn/vulnerabilities/cross-site-scripting",
+              "docs/learn/vulnerabilities/insecure-deserialization",
+              "docs/learn/vulnerabilities/idor",
+              "docs/learn/vulnerabilities/open-redirect",
+              "docs/learn/vulnerabilities/server-side-request-forgery",
+              "docs/learn/vulnerabilities/sql-injection",
+              "docs/learn/vulnerabilities/xml-security"
+            ]
+          },
+          {
+            "group": "Python",
+            "pages": [
+              "docs/learn/vulnerabilities/insecure-deserialization/python"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Knowledge base",
+        "groups": [
+          {
+            "group": "Knowledge base",
             "pages": [
               "docs/kb"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Release notes",
+        "groups": [
           {
-            "group": "Release Notes",
+            "group": "Release notes",
             "pages": [
               "docs/release-notes"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Support & resources",
+        "groups": [
           {
             "group": "Support",
             "pages": [
@@ -517,6 +475,10 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "API",
+        "href": "https://semgrep.dev/docs/api"
       }
     ]
   },
