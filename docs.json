@@ -50,154 +50,144 @@
         "groups": [
           {
             "group": "Supported languages",
-                "pages": [
-                  "docs/supported-languages",
-                  "docs/languages/csharp",
-                  "docs/languages/go",
-                  "docs/languages/java",
-                  "docs/languages/javascript",
-                  "docs/languages/kotlin",
-                  "docs/languages/python",
-                  "docs/languages/ruby",
-                  "docs/languages/scala",
-                  "docs/languages/swift"
-                ]
-              },
-              {
-                "group": "Local and CLI scans",
-                "pages": [
-                  "docs/category/local-and-cli-scans",
-                  "docs/getting-started/cli",
-                  "docs/running-rules",
-                  "docs/update",
-                  "docs/deployment/local-to-scp-scans",
-                  "docs/troubleshooting/semgrep"
-                ]
-              },
-              {
-                "group": "Core deployment",
-                "pages": [
-                  "docs/deployment/core-deployment",
-                  "docs/deployment/checklist",
-                  "docs/deployment/create-account-and-orgs",
-                  "docs/deployment/connect-scm",
-                  "docs/deployment/sso",
-                  "docs/category/scan-repositories-with-the-appsec-platform",
-                  "docs/category/pr-or-mr-comments",
-                  "docs/deployment/beyond-core-deployment"
-                ]
-              },
-              {
-                "group": "Deployment at scale",
-                "pages": [
-                  "docs/category/deployment-at-scale",
-                  "docs/deployment/teams",
-                  "docs/deployment/tokens",
-                  "docs/semgrep-appsec-platform/tags",
-                  "docs/semgrep-ci/network-broker"
-                ]
-              },
-              {
-                "group": "Secure guardrails",
-                "pages": [
-                  "docs/secure-guardrails/secure-guardrails-in-semgrep",
-                  "docs/secure-guardrails/secure-defaults",
-                  "docs/secure-guardrails/custom-guardrails-rules"
-                ]
-              },
-              {
-                "group": "Notifications",
-                "pages": [
-                  "docs/semgrep-appsec-platform/notifications",
-                  "docs/semgrep-appsec-platform/slack-notifications",
-                  "docs/semgrep-appsec-platform/email-notifications",
-                  "docs/semgrep-appsec-platform/webhooks"
-                ]
-              },
-              {
-                "group": "Dashboard",
-                "pages": [
-                  "docs/semgrep-appsec-platform/dashboard"
-                ]
-              },
-              {
-                "group": "Extensions",
-                "pages": [
-                  "docs/extensions/overview",
-                  "docs/extensions/semgrep-vs-code",
-                  "docs/extensions/semgrep-intellij",
-                  "docs/extensions/pre-commit"
-                ]
-              },
-              {
-                "group": "Integrations",
-                "pages": [
-                  "docs/mcp",
-                  "docs/semgrep-appsec-platform/cortex",
-                  "docs/semgrep-appsec-platform/jira",
-                  "docs/semgrep-appsec-platform/sysdig",
-                  "docs/semgrep-appsec-platform/wiz"
-                ]
-              },
-              {
-                "group": "SAST (Code)",
-                "pages": [
-                  "docs/semgrep-code/overview",
-                  "docs/semgrep-code/findings",
-                  "docs/semgrep-code/triage-remediation",
-                  "docs/semgrep-code/policies",
-                  "docs/semgrep-code/semgrep-pro-engine-intro",
-                  "docs/semgrep-code/remove-duplicates"
-                ]
-              },
-              {
-                "group": "SCA (Supply Chain)",
-                "pages": [
-                  "docs/semgrep-supply-chain/overview",
-                  "docs/semgrep-supply-chain/getting-started",
-                  "docs/semgrep-supply-chain/sbom",
-                  "docs/semgrep-supply-chain/dependency-search",
-                  "docs/semgrep-supply-chain/license-compliance",
-                  "docs/semgrep-supply-chain/malicious-dependencies"
-                ]
-              },
-              {
-                "group": "Secrets",
-                "pages": [
-                  "docs/semgrep-secrets/conceptual-overview",
-                  "docs/semgrep-secrets/getting-started",
-                  "docs/semgrep-secrets/findings",
-                  "docs/semgrep-secrets/triage-remediation",
-                  "docs/semgrep-secrets/policies",
-                  "docs/semgrep-secrets/rules",
-                  "docs/semgrep-secrets/validators",
-                  "docs/semgrep-secrets/glossary"
-                ]
-              },
-              {
-                "group": "Semgrep Assistant overview",
-                "pages": [
-                  "docs/semgrep-assistant/overview",
-                  "docs/semgrep-assistant/metrics",
-                  "docs/semgrep-assistant/privacy"
-                ]
-              },
-              {
-                "group": "Semgrep Assistant getting started",
-                "pages": [
-                  "docs/semgrep-assistant/getting-started",
-                  "docs/semgrep-assistant/customize",
-                  "docs/semgrep-assistant/best-practices-for-memories"
-                ]
-              },
-              {
-                "group": "Semgrep Assistant analyze",
-                "pages": [
-                  "docs/semgrep-assistant/analyze"
-                ]
-              }
+            "pages": [
+              "docs/supported-languages",
+              "docs/languages/csharp",
+              "docs/languages/go",
+              "docs/languages/java",
+              "docs/languages/javascript",
+              "docs/languages/kotlin",
+              "docs/languages/python",
+              "docs/languages/ruby",
+              "docs/languages/scala",
+              "docs/languages/swift"
             ]
           },
+          {
+            "group": "Local and CLI scans",
+            "pages": [
+              "docs/category/local-and-cli-scans",
+              "docs/getting-started/cli",
+              "docs/running-rules",
+              "docs/update",
+              "docs/deployment/local-to-scp-scans",
+              "docs/troubleshooting/semgrep"
+            ]
+          },
+          {
+            "group": "Core deployment",
+            "pages": [
+              "docs/deployment/core-deployment",
+              "docs/deployment/checklist",
+              "docs/deployment/create-account-and-orgs",
+              "docs/deployment/connect-scm",
+              "docs/deployment/sso",
+              "docs/category/scan-repositories-with-the-appsec-platform",
+              "docs/category/pr-or-mr-comments",
+              "docs/deployment/beyond-core-deployment"
+            ]
+          },
+          {
+            "group": "Deployment at scale",
+            "pages": [
+              "docs/category/deployment-at-scale",
+              "docs/deployment/teams",
+              "docs/deployment/tokens",
+              "docs/semgrep-appsec-platform/tags",
+              "docs/semgrep-ci/network-broker"
+            ]
+          },
+          {
+            "group": "Secure guardrails",
+            "pages": [
+              "docs/secure-guardrails/secure-guardrails-in-semgrep",
+              "docs/secure-guardrails/secure-defaults",
+              "docs/secure-guardrails/custom-guardrails-rules"
+            ]
+          },
+          {
+            "group": "Notifications",
+            "pages": [
+              "docs/semgrep-appsec-platform/notifications",
+              "docs/semgrep-appsec-platform/slack-notifications",
+              "docs/semgrep-appsec-platform/email-notifications",
+              "docs/semgrep-appsec-platform/webhooks"
+            ]
+          },
+          {
+            "group": "Dashboard",
+            "pages": [
+              "docs/semgrep-appsec-platform/dashboard"
+            ]
+          },
+          {
+            "group": "Extensions",
+            "pages": [
+              "docs/extensions/overview",
+              "docs/extensions/semgrep-vs-code",
+              "docs/extensions/semgrep-intellij",
+              "docs/extensions/pre-commit"
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "docs/mcp",
+              "docs/semgrep-appsec-platform/cortex",
+              "docs/semgrep-appsec-platform/jira",
+              "docs/semgrep-appsec-platform/sysdig",
+              "docs/semgrep-appsec-platform/wiz"
+            ]
+          },
+          {
+            "group": "SAST (Code)",
+            "pages": [
+              "docs/semgrep-code/overview",
+              "docs/semgrep-code/findings",
+              "docs/semgrep-code/triage-remediation",
+              "docs/semgrep-code/policies",
+              "docs/semgrep-code/semgrep-pro-engine-intro",
+              "docs/semgrep-code/remove-duplicates"
+            ]
+          },
+          {
+            "group": "SCA (Supply Chain)",
+            "pages": [
+              "docs/semgrep-supply-chain/overview",
+              "docs/semgrep-supply-chain/getting-started",
+              "docs/semgrep-supply-chain/sbom",
+              "docs/semgrep-supply-chain/dependency-search",
+              "docs/semgrep-supply-chain/license-compliance",
+              "docs/semgrep-supply-chain/malicious-dependencies"
+            ]
+          },
+          {
+            "group": "Secrets",
+            "pages": [
+              "docs/semgrep-secrets/conceptual-overview",
+              "docs/semgrep-secrets/getting-started",
+              "docs/semgrep-secrets/findings",
+              "docs/semgrep-secrets/triage-remediation",
+              "docs/semgrep-secrets/policies",
+              "docs/semgrep-secrets/rules",
+              "docs/semgrep-secrets/validators",
+              "docs/semgrep-secrets/glossary"
+            ]
+          },
+          {
+            "group": "Semgrep Assistant",
+            "pages": [
+              "docs/semgrep-assistant/overview",
+              "docs/semgrep-assistant/getting-started",
+              "docs/semgrep-assistant/customize",
+              "docs/semgrep-assistant/best-practices-for-memories",
+              "docs/semgrep-assistant/analyze",
+              "docs/semgrep-assistant/metrics",
+              "docs/semgrep-assistant/privacy"
+            ]
+          }
+        ]
+      },
           {
             "tab": "Write rules",
             "groups": [
