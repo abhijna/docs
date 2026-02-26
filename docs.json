@@ -3,13 +3,13 @@
   "theme": "mint",
   "name": "Semgrep",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#55D799",
+    "primary": "#008456",
+    "light": "#008456",
     "dark": "#624DEF"
   },
   "background": {
     "color": {
-      "light": "#DEEDE8",
+      "light": "#f8f9f9",
       "dark": "#131a2c"
     },
     "decoration": "gradient"
