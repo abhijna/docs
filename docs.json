@@ -47,27 +47,9 @@
       {
         "tab": "Scan with Semgrep",
         "icon": "shield-check",
-            "groups": [
-              {
-                "group": "Quickstart",
-                "pages": [
-                  "docs/getting-started/quickstart-managed-scans"
-                ]
-              },
-              {
-                "group": "Prerequisites",
-                "pages": [
-                  "docs/prerequisites"
-                ]
-              },
-              {
-                "group": "Scm Support",
-                "pages": [
-                  "docs/getting-started/scm-support"
-                ]
-              },
-              {
-                "group": "Supported languages",
+        "groups": [
+          {
+            "group": "Supported languages",
                 "pages": [
                   "docs/supported-languages",
                   "docs/languages/csharp",
