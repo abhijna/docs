@@ -1,11 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "sequoia",
+  "theme": "mint",
   "name": "Semgrep",
   "colors": {
-    "primary": "#2ACFA6",
-    "light": "#AFEAD8",
-    "dark": "#0D9373"
+    "primary": "#008456",
+    "light": "#008456",
+    "dark": "#624DEF"
   },
   "background": {
     "color": {
@@ -17,7 +17,6 @@
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
-
       {
         "tab": "What's Semgrep",
         "groups": [
@@ -476,5 +475,36 @@
     "light": "/images/docs/img/semgrep-icon-text-horizontal.svg",
     "dark": "/images/docs/img/semgrep-icon-text-horizontal-dark.svg",
     "href": "/docs/index"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Login",
+        "href": "https://semgrep.dev/orgs/-"
+      }
+    ],
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/semgrep/semgrep"
+    }
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/semgrep",
+      "github": "https://github.com/semgrep/semgrep",
+      "linkedin": "https://www.linkedin.com/company/semgrep"
+    }
   }
 }
