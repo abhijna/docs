@@ -256,47 +256,95 @@
           }
         ]
       },
+      {
+        "tab": "Learn",
+        "icon": "graduation-cap",
+        "groups": [
           {
-            "tab": "Learning guides",
-            "groups": [
+            "group": "Overview",
+            "pages": [
+              "docs/learn"
+            ]
+          },
+          {
+            "group": "Security foundations",
+            "pages": [
+              "docs/learn/security-foundations/overview",
+              "docs/learn/security-foundations/sast/overview",
+              "docs/learn/security-foundations/supply-chain-security",
+              "docs/learn/security-foundations/security-testing-workflow"
+            ]
+          },
+          {
+            "group": "Vulnerabilities",
+            "pages": [
+              "docs/learn/vulnerabilities/overview",
+              "docs/learn/vulnerabilities/code-injection",
+              "docs/learn/vulnerabilities/command-injection",
+              "docs/learn/vulnerabilities/cross-site-scripting",
+              "docs/learn/vulnerabilities/insecure-deserialization",
+              "docs/learn/vulnerabilities/idor",
+              "docs/learn/vulnerabilities/open-redirect",
+              "docs/learn/vulnerabilities/server-side-request-forgery",
+              "docs/learn/vulnerabilities/sql-injection",
+              "docs/learn/vulnerabilities/xml-security",
+              "docs/learn/vulnerabilities/insecure-deserialization/python"
+            ]
+          },
+          {
+            "group": "Cheat sheets",
+            "pages": [
+              "docs/cheat-sheets/overview",
               {
-                "group": "Learn",
+                "group": "Go",
                 "pages": [
-                  "docs/learn"
+                  "docs/category/go",
+                  "docs/cheat-sheets/go-command-injection",
+                  "docs/cheat-sheets/go-xss"
                 ]
               },
               {
-                "group": "Security Foundations",
+                "group": "Java",
                 "pages": [
-                  "docs/learn/security-foundations/overview",
-                  "docs/learn/security-foundations/sast/overview",
-                  "docs/learn/security-foundations/supply-chain-security",
-                  "docs/learn/security-foundations/security-testing-workflow"
+                  "docs/category/java",
+                  "docs/cheat-sheets/java-code-injection",
+                  "docs/cheat-sheets/java-command-injection",
+                  "docs/cheat-sheets/java-jsp-xss",
+                  "docs/cheat-sheets/java-xxe"
                 ]
               },
               {
-                "group": "Vulnerabilities",
+                "group": "JavaScript",
                 "pages": [
-                  "docs/learn/vulnerabilities/overview",
-                  "docs/learn/vulnerabilities/code-injection",
-                  "docs/learn/vulnerabilities/command-injection",
-                  "docs/learn/vulnerabilities/cross-site-scripting",
-                  "docs/learn/vulnerabilities/insecure-deserialization",
-                  "docs/learn/vulnerabilities/idor",
-                  "docs/learn/vulnerabilities/open-redirect",
-                  "docs/learn/vulnerabilities/server-side-request-forgery",
-                  "docs/learn/vulnerabilities/sql-injection",
-                  "docs/learn/vulnerabilities/xml-security"
+                  "docs/category/javascript",
+                  "docs/cheat-sheets/javascript-code-injection",
+                  "docs/cheat-sheets/javascript-command-injection",
+                  "docs/cheat-sheets/express-xss"
                 ]
               },
               {
                 "group": "Python",
                 "pages": [
-                  "docs/learn/vulnerabilities/insecure-deserialization/python"
+                  "docs/category/python",
+                  "docs/cheat-sheets/python-code-injection",
+                  "docs/cheat-sheets/python-command-injection",
+                  "docs/cheat-sheets/django-xss",
+                  "docs/cheat-sheets/flask-xss"
+                ]
+              },
+              {
+                "group": "Ruby",
+                "pages": [
+                  "docs/category/ruby",
+                  "docs/cheat-sheets/ruby-code-injection",
+                  "docs/cheat-sheets/ruby-command-injection",
+                  "docs/cheat-sheets/rails-xss"
                 ]
               }
             ]
-          },
+          }
+        ]
+      },
           {
             "tab": "Semgrep docs",
             "groups": [
