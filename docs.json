@@ -188,73 +188,74 @@
           }
         ]
       },
+      {
+        "tab": "Write rules",
+        "icon": "code",
+        "groups": [
           {
-            "tab": "Write rules",
-            "groups": [
-              {
-                "group": "Overview",
-                "pages": [
-                  "docs/writing-rules/overview"
-                ]
-              },
-              {
-                "group": "Rule structure syntax",
-                "pages": [
-                  "docs/writing-rules/rule-syntax",
-                  "docs/writing-rules/rule-ideas"
-                ]
-              },
-              {
-                "group": "Rule pattern syntax",
-                "pages": [
-                  "docs/writing-rules/pattern-syntax",
-                  "docs/writing-rules/pattern-examples"
-                ]
-              },
-              {
-                "group": "Advanced rule-writing techniques",
-                "pages": [
-                  "docs/writing-rules/autofix",
-                  {
-                    "group": "Dataflow analysis",
-                    "pages": [
-                      "docs/writing-rules/data-flow/data-flow-overview",
-                      "docs/writing-rules/data-flow/constant-propagation",
-                      "docs/writing-rules/data-flow/taint-mode/overview",
-                      "docs/writing-rules/data-flow/status"
-                    ]
-                  },
-                  "docs/writing-rules/generic-pattern-matching",
-                  "docs/writing-rules/metavariable-analysis",
-                  "docs/writing-rules/experiments/introduction"
-                ]
-              },
-              {
-                "group": "Private Rules",
-                "pages": [
-                  "docs/writing-rules/private-rules"
-                ]
-              },
-              {
-                "group": "Testing Rules",
-                "pages": [
-                  "docs/writing-rules/testing-rules"
-                ]
-              },
-              {
-                "group": "Rules",
-                "pages": [
-                  "docs/troubleshooting/rules"
-                ]
-              },
-              {
-                "group": "Glossary",
-                "pages": [
-                  "docs/writing-rules/glossary"
-                ]
-              }
+            "group": "Overview",
+            "pages": [
+              "docs/writing-rules/overview"
             ]
           },
+          {
+            "group": "Rule structure syntax",
+            "pages": [
+              "docs/writing-rules/rule-syntax",
+              "docs/writing-rules/rule-ideas"
+            ]
+          },
+          {
+            "group": "Rule pattern syntax",
+            "pages": [
+              "docs/writing-rules/pattern-syntax",
+              "docs/writing-rules/pattern-examples"
+            ]
+          },
+          {
+            "group": "Advanced techniques",
+            "pages": [
+              "docs/writing-rules/autofix",
+              {
+                "group": "Dataflow analysis",
+                "pages": [
+                  "docs/writing-rules/data-flow/data-flow-overview",
+                  "docs/writing-rules/data-flow/constant-propagation",
+                  "docs/writing-rules/data-flow/taint-mode/overview",
+                  "docs/writing-rules/data-flow/status"
+                ]
+              },
+              "docs/writing-rules/generic-pattern-matching",
+              "docs/writing-rules/metavariable-analysis",
+              "docs/writing-rules/experiments/introduction"
+            ]
+          },
+          {
+            "group": "Private rules",
+            "pages": [
+              "docs/writing-rules/private-rules"
+            ]
+          },
+          {
+            "group": "Testing rules",
+            "pages": [
+              "docs/writing-rules/testing-rules"
+            ]
+          },
+          {
+            "group": "Troubleshooting",
+            "pages": [
+              "docs/troubleshooting/rules"
+            ]
+          },
+          {
+            "group": "Glossary",
+            "pages": [
+              "docs/writing-rules/glossary"
+            ]
+          }
+        ]
+      },
           {
             "tab": "Learning guides",
             "groups": [
