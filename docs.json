@@ -455,24 +455,19 @@
     ],
     "anchors": [
       {
-        "anchor": "API",
-        "icon": "square-terminal",
-        "href": "https://semgrep.dev/docs/api"
+        "anchor": "Community",
+        "icon": "slack",
+        "href": "https://go.semgrep.dev/slack"
       },
       {
-        "anchor": "Knowledge base",
-        "icon": "lightbulb",
-        "href": "/docs/kb"
+        "anchor": "Playground",
+        "icon": "play",
+        "href": "https://semgrep.dev/playground"
       },
       {
-        "anchor": "Release notes",
-        "icon": "megaphone",
-        "href": "/docs/release-notes"
-      },
-      {
-        "anchor": "Support",
-        "icon": "life-buoy",
-        "href": "/docs/support"
+        "anchor": "Registry",
+        "icon": "book",
+        "href": "https://semgrep.dev/explore"
       }
     ]
   },
