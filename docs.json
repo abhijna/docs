@@ -159,7 +159,7 @@
         ]
       },
       {
-        "tab": "Write rules",
+        "tab": "Write custom rules",
         "icon": "code",
         "groups": [
           {
@@ -169,14 +169,14 @@
             ]
           },
           {
-            "group": "Rule structure syntax",
+            "group": "Rule syntax",
             "pages": [
               "docs/writing-rules/rule-syntax",
               "docs/writing-rules/rule-ideas"
             ]
           },
           {
-            "group": "Rule pattern syntax",
+            "group": "Pattern syntax",
             "pages": [
               "docs/writing-rules/pattern-syntax",
               "docs/writing-rules/pattern-examples"
