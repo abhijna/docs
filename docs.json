@@ -227,90 +227,54 @@
         ]
       },
       {
-        "tab": "Learn",
-        "icon": "graduation-cap",
+        "tab": "Supported languages",
+        "icon": "code",
         "groups": [
           {
-            "group": "Overview",
+            "group": "Supported languages",
             "pages": [
-              "docs/learn"
+              "docs/supported-languages",
+              "docs/languages/csharp",
+              "docs/languages/go",
+              "docs/languages/java",
+              "docs/languages/javascript",
+              "docs/languages/kotlin",
+              "docs/languages/python",
+              "docs/languages/ruby",
+              "docs/languages/scala",
+              "docs/languages/swift"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Extensions",
+        "icon": "puzzle-piece",
+        "groups": [
           {
-            "group": "Security foundations",
+            "group": "Extensions",
             "pages": [
-              "docs/learn/security-foundations/overview",
-              "docs/learn/security-foundations/sast/overview",
-              "docs/learn/security-foundations/supply-chain-security",
-              "docs/learn/security-foundations/security-testing-workflow"
+              "docs/extensions/overview",
+              "docs/extensions/semgrep-vs-code",
+              "docs/extensions/semgrep-intellij",
+              "docs/extensions/pre-commit"
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "CLI",
+        "icon": "terminal",
+        "groups": [
           {
-            "group": "Vulnerabilities",
+            "group": "Local and CLI scans",
             "pages": [
-              "docs/learn/vulnerabilities/overview",
-              "docs/learn/vulnerabilities/code-injection",
-              "docs/learn/vulnerabilities/command-injection",
-              "docs/learn/vulnerabilities/cross-site-scripting",
-              "docs/learn/vulnerabilities/insecure-deserialization",
-              "docs/learn/vulnerabilities/idor",
-              "docs/learn/vulnerabilities/open-redirect",
-              "docs/learn/vulnerabilities/server-side-request-forgery",
-              "docs/learn/vulnerabilities/sql-injection",
-              "docs/learn/vulnerabilities/xml-security",
-              "docs/learn/vulnerabilities/insecure-deserialization/python"
-            ]
-          },
-          {
-            "group": "Cheat sheets",
-            "pages": [
-              "docs/cheat-sheets/overview",
-              {
-                "group": "Go",
-                "pages": [
-                  "docs/category/go",
-                  "docs/cheat-sheets/go-command-injection",
-                  "docs/cheat-sheets/go-xss"
-                ]
-              },
-              {
-                "group": "Java",
-                "pages": [
-                  "docs/category/java",
-                  "docs/cheat-sheets/java-code-injection",
-                  "docs/cheat-sheets/java-command-injection",
-                  "docs/cheat-sheets/java-jsp-xss",
-                  "docs/cheat-sheets/java-xxe"
-                ]
-              },
-              {
-                "group": "JavaScript",
-                "pages": [
-                  "docs/category/javascript",
-                  "docs/cheat-sheets/javascript-code-injection",
-                  "docs/cheat-sheets/javascript-command-injection",
-                  "docs/cheat-sheets/express-xss"
-                ]
-              },
-              {
-                "group": "Python",
-                "pages": [
-                  "docs/category/python",
-                  "docs/cheat-sheets/python-code-injection",
-                  "docs/cheat-sheets/python-command-injection",
-                  "docs/cheat-sheets/django-xss",
-                  "docs/cheat-sheets/flask-xss"
-                ]
-              },
-              {
-                "group": "Ruby",
-                "pages": [
-                  "docs/category/ruby",
-                  "docs/cheat-sheets/ruby-code-injection",
-                  "docs/cheat-sheets/ruby-command-injection",
-                  "docs/cheat-sheets/rails-xss"
-                ]
-              }
+              "docs/category/local-and-cli-scans",
+              "docs/getting-started/cli",
+              "docs/running-rules",
+              "docs/update",
+              "docs/deployment/local-to-scp-scans",
+              "docs/troubleshooting/semgrep"
             ]
           }
         ]
