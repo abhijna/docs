@@ -18,21 +18,20 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Getting started",
+        "tab": "Docs home",
+        "icon": "house",
+        "pages": [
+          "docs/index"
+        ]
+      },
+      {
+        "tab": "Get started",
         "icon": "rocket",
         "groups": [
           {
-            "group": "Overview",
+            "group": "Get started",
             "pages": [
-              "docs/index",
-              "docs/introduction"
-            ]
-          },
-          {
-            "group": "Quickstart",
-            "pages": [
-              "docs/getting-started/quickstart-managed-scans",
-              "docs/getting-started/quickstart-ce"
+              "docs/getting-started/quickstart-managed-scans"
             ]
           },
           {
@@ -45,8 +44,37 @@
         ]
       },
       {
-        "tab": "Scan with Semgrep",
-        "icon": "shield-check",
+        "tab": "Deploy Semgrep",
+        "icon": "rocket",
+        "groups": [
+          {
+            "group": "Core deployment",
+            "pages": [
+              "docs/deployment/core-deployment",
+              "docs/deployment/checklist",
+              "docs/deployment/create-account-and-orgs",
+              "docs/deployment/connect-scm",
+              "docs/deployment/sso",
+              "docs/category/scan-repositories-with-the-appsec-platform",
+              "docs/category/pr-or-mr-comments",
+              "docs/deployment/beyond-core-deployment"
+            ]
+          },
+          {
+            "group": "Deployment at scale",
+            "pages": [
+              "docs/category/deployment-at-scale",
+              "docs/deployment/teams",
+              "docs/deployment/tokens",
+              "docs/semgrep-appsec-platform/tags",
+              "docs/semgrep-ci/network-broker"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Triage and remediate",
+        "icon": "list-checks",
         "groups": [
           {
             "group": "Supported languages",
